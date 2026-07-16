@@ -5,7 +5,7 @@ const BookProjectsList = ({ project, handleNavigate }) => {
         type='button'
         onClick={(e) => {
           e.stopPropagation()
-          handleNavigate(project.destinationPage)
+          handleNavigate(project.destinationSheet)
         }}
         className=' projects  letter-title-book no-button-styles  '
       >

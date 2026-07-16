@@ -1,6 +1,6 @@
 const NAVIGABLE_ITEM_SELECTOR = 'a[href], button:not([disabled])'
-const BOOK_NAVIGATION_LIST_SELECTOR = '[data-book-navigation-page]'
-const BOOK_PAGE_NAVIGATION_SELECTOR = '[data-book-page-navigation]'
+const BOOK_NAVIGATION_LIST_SELECTOR = '[data-book-navigation-sheet]'
+const BOOK_SHEET_NAVIGATION_SELECTOR = '[data-book-sheet-navigation]'
 
 const getActiveElement = () => window.document.activeElement
 
@@ -22,16 +22,16 @@ const clearFocus = ({ selector }) => {
 
 export const clearBookNavigationFocus = () => {
   clearFocus({
-    selector: `${BOOK_NAVIGATION_LIST_SELECTOR}, ${BOOK_PAGE_NAVIGATION_SELECTOR}`
+    selector: `${BOOK_NAVIGATION_LIST_SELECTOR}, ${BOOK_SHEET_NAVIGATION_SELECTOR}`
   })
 }
 
 export const clearBookPageNavigationFocus = () => (
-  clearFocus({ selector: BOOK_PAGE_NAVIGATION_SELECTOR })
+  clearFocus({ selector: BOOK_SHEET_NAVIGATION_SELECTOR })
 )
 
 export const isBookPageNavigationFocused = () => (
-  hasFocusedElement({ selector: BOOK_PAGE_NAVIGATION_SELECTOR })
+  hasFocusedElement({ selector: BOOK_SHEET_NAVIGATION_SELECTOR })
 )
 
 const getItems = ({ container }) => (
@@ -52,48 +52,48 @@ const moveFocus = ({ items, direction }) => {
   return true
 }
 
-const getBookListItems = ({ currentPage, preferLastList = false }) => {
+const getBookListItems = ({ currentSheet, preferLastList = false }) => {
   const lists = window.document.querySelectorAll(
-    `[data-book-navigation-page="${currentPage}"]`
+    `[data-book-navigation-sheet="${currentSheet}"]`
   )
   const list = preferLastList ? lists[lists.length - 1] : lists[0]
 
   return getItems({ container: list })
 }
 
-const getBookPageNavigationItems = ({ currentPage }) => {
+const getBookPageNavigationItems = ({ currentSheet }) => {
   const navigation = window.document.querySelector(
-    `[data-book-page-navigation="${currentPage - 1}"]`
+    `[data-book-sheet-navigation="${currentSheet - 1}"]`
   )
 
   return getItems({ container: navigation })
 }
 
 export const focusFirstBookListItem = ({
-  currentPage,
+  currentSheet,
   preferLastList = false
 }) => {
-  const [firstItem] = getBookListItems({ currentPage, preferLastList })
+  const [firstItem] = getBookListItems({ currentSheet, preferLastList })
   if (!firstItem) return false
 
   firstItem.focus()
   return true
 }
 
-export const moveBookListFocus = ({ currentPage, direction }) => {
-  const items = getBookListItems({ currentPage })
+export const moveBookListFocus = ({ currentSheet, direction }) => {
+  const items = getBookListItems({ currentSheet })
   return moveFocus({ items, direction })
 }
 
-export const focusFirstBookPageNavigationItem = ({ currentPage }) => {
-  const [firstItem] = getBookPageNavigationItems({ currentPage })
+export const focusFirstBookPageNavigationItem = ({ currentSheet }) => {
+  const [firstItem] = getBookPageNavigationItems({ currentSheet })
   if (!firstItem) return false
 
   firstItem.focus()
   return true
 }
 
-export const moveBookPageNavigationFocus = ({ currentPage, direction }) => {
-  const items = getBookPageNavigationItems({ currentPage })
+export const moveBookPageNavigationFocus = ({ currentSheet, direction }) => {
+  const items = getBookPageNavigationItems({ currentSheet })
   return moveFocus({ items, direction })
 }

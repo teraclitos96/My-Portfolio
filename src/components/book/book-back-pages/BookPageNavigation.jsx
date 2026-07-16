@@ -1,4 +1,4 @@
-import { BOOK_PAGE } from '../../../utils/book'
+import { BOOK_SHEET } from '../../../utils/book'
 
 const labelsByLanguage = {
   english: {
@@ -20,27 +20,27 @@ const labelsByLanguage = {
 const BookPageNavigation = ({
   language,
   handleNavigate,
-  pageIndex,
+  sheetIndex,
   showProjects = false
 }) => {
   const labels = labelsByLanguage[language]
 
-  const navigateTo = ({ event, destinationPage }) => {
+  const navigateTo = ({ event, destinationSheet }) => {
     event.stopPropagation()
-    handleNavigate(destinationPage)
+    handleNavigate(destinationSheet)
   }
 
   return (
     <nav
       className='book-page-navigation'
       aria-label={labels.navigation}
-      data-book-page-navigation={pageIndex}
+      data-book-sheet-navigation={sheetIndex}
     >
       <button
         type='button'
         className='book-page-navigation-link letter-title-book no-button-styles'
         aria-label={labels.indexAriaLabel}
-        onClick={event => navigateTo({ event, destinationPage: BOOK_PAGE.index })}
+        onClick={event => navigateTo({ event, destinationSheet: BOOK_SHEET.index })}
       >
         {labels.index}
       </button>
@@ -49,7 +49,7 @@ const BookPageNavigation = ({
           type='button'
           className='book-page-navigation-link letter-title-book no-button-styles'
           aria-label={labels.projectsAriaLabel}
-          onClick={event => navigateTo({ event, destinationPage: BOOK_PAGE.projects })}
+          onClick={event => navigateTo({ event, destinationSheet: BOOK_SHEET.projects })}
         >
           {labels.projects}
         </button>

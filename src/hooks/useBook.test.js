@@ -14,11 +14,11 @@ describe('useBook keyboard navigation', () => {
     const { result } = renderBook()
 
     fireEvent.keyDown(window, { key: 'ArrowRight' })
-    expect(result.current.view.currentPage).toBe(1)
+    expect(result.current.view.currentSheet).toBe(1)
 
     act(() => jest.advanceTimersByTime(700))
     fireEvent.keyDown(window, { key: 'ArrowLeft' })
-    expect(result.current.view.currentPage).toBe(0)
+    expect(result.current.view.currentSheet).toBe(0)
   })
 
   test('opens a closed book directly at the index with Enter', () => {
@@ -26,7 +26,7 @@ describe('useBook keyboard navigation', () => {
 
     fireEvent.keyDown(window, { key: 'Enter' })
 
-    expect(result.current.view.navigationTransition.targetPage).toBe(2)
+    expect(result.current.view.navigationTransition.targetSheet).toBe(2)
   })
 
   test('does nothing with Enter when the book is already open and unfocused', () => {
@@ -36,7 +36,7 @@ describe('useBook keyboard navigation', () => {
     act(() => jest.advanceTimersByTime(700))
     fireEvent.keyDown(window, { key: 'Enter' })
 
-    expect(result.current.view.currentPage).toBe(1)
+    expect(result.current.view.currentSheet).toBe(1)
     expect(result.current.view.navigationTransition).toBeNull()
   })
 
@@ -55,14 +55,14 @@ describe('useBook keyboard navigation', () => {
     const { result } = renderBook()
     const list = document.createElement('ul')
     const firstItem = document.createElement('button')
-    list.dataset.bookNavigationPage = '2'
+    list.dataset.bookNavigationSheet = '2'
     list.appendChild(firstItem)
     document.body.appendChild(list)
 
     fireEvent.keyDown(window, { key: 'ArrowRight' })
     act(() => jest.advanceTimersByTime(700))
     fireEvent.keyDown(window, { key: 'ArrowRight' })
-    expect(result.current.view.currentPage).toBe(2)
+    expect(result.current.view.currentSheet).toBe(2)
 
     act(() => jest.advanceTimersByTime(700))
     expect(document.activeElement).toBe(firstItem)
@@ -73,7 +73,7 @@ describe('useBook keyboard navigation', () => {
     renderBook()
     const list = document.createElement('ul')
     const firstItem = document.createElement('button')
-    list.dataset.bookNavigationPage = '2'
+    list.dataset.bookNavigationSheet = '2'
     list.appendChild(firstItem)
     document.body.appendChild(list)
 
