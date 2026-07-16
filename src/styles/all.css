@@ -5,33 +5,32 @@
 @import url("loader.css");
 @import url("error404.css");
 @import url("mediaqueries.css");
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital@1&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Goudy+Bookletter+1911&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Overlock+SC&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@600&display=swap");
+
+.book-content,
+.book {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+
+.face-front,
+.face-back {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
 
 * {
-  font-family: "Goudy Bookletter 1911", serif;
-  font-family: "Barlow Semi Condensed", sans-serif;
   font-family: "Gentium Book Plus", serif;
 }
 
 .old-letter {
-  font-family: "Barlow Semi Condensed", sans-serif;
-  font-family: "Pacifico", cursive;
-  font-family: "Cormorant Garamond", serif;
-  font-family: "EB Garamond", serif;
   font-family: "Overlock SC", cursive;
 }
 .letter-title-book {
-  font-family: "Cinzel", serif;
-  font-family: "Gentium Book Plus", serif;
   font-family: "Barlow Semi Condensed", sans-serif;
 }
 

@@ -1,7 +1,6 @@
-import React from 'react'
 import BookLinkToMail from './BookLinkToMail'
 
-const BookIndex = ({ item, functionChangePageForward, positionOfTheIndexOfTheBook, setPositionPage, index }) => {
+const BookIndex = ({ item, handleNavigate, index }) => {
   return (
     <li>
       {index === 2
@@ -14,8 +13,7 @@ const BookIndex = ({ item, functionChangePageForward, positionOfTheIndexOfTheBoo
             className='mb-2  projects letter-title-book no-button-styles'
             onClick={(e) => {
               e.stopPropagation()
-              functionChangePageForward(item.numberOfTranslationsToMake, positionOfTheIndexOfTheBook)
-              setPositionPage(item.positionOfTheFrontPage)
+              handleNavigate(item.destinationPage)
             }}
           >
             {item.title}

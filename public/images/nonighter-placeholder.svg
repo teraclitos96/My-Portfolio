@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">NoNighter Excel add-in placeholder</title>
+  <desc id="description">Generic spreadsheet interface representing a Microsoft Excel add-in.</desc>
+  <rect width="1200" height="675" fill="#f5f7f4"/>
+  <rect x="80" y="70" width="1040" height="535" rx="18" fill="#ffffff" stroke="#d8ded9" stroke-width="8"/>
+  <rect x="80" y="70" width="1040" height="72" rx="18" fill="#217346"/>
+  <rect x="80" y="124" width="1040" height="18" fill="#217346"/>
+  <circle cx="125" cy="106" r="10" fill="#ffffff" opacity="0.85"/>
+  <circle cx="160" cy="106" r="10" fill="#ffffff" opacity="0.65"/>
+  <circle cx="195" cy="106" r="10" fill="#ffffff" opacity="0.45"/>
+  <g stroke="#d8ded9" stroke-width="3">
+    <path d="M120 200H760M120 265H760M120 330H760M120 395H760M120 460H760M120 525H760"/>
+    <path d="M120 200V525M280 200V525M440 200V525M600 200V525M760 200V525"/>
+  </g>
+  <rect x="800" y="180" width="270" height="365" rx="14" fill="#eef5f0"/>
+  <rect x="840" y="225" width="190" height="22" rx="11" fill="#217346" opacity="0.9"/>
+  <rect x="840" y="280" width="150" height="14" rx="7" fill="#86ab95"/>
+  <rect x="840" y="320" width="175" height="14" rx="7" fill="#b4c9bc"/>
+  <rect x="840" y="360" width="135" height="14" rx="7" fill="#b4c9bc"/>
+  <rect x="840" y="430" width="150" height="48" rx="10" fill="#217346"/>
+  <text x="600" y="640" fill="#33433a" font-family="Arial, sans-serif" font-size="30" text-anchor="middle">NoNighter · Microsoft Excel Add-in</text>
+</svg>

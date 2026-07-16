@@ -1,158 +1,55 @@
-import React, { useState, useEffect } from 'react'
-
-import '../styles/all.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
+import WoodenButton from './WoodenButton'
+import '../styles/all.css'
 
-const NavBar = ({
-  language,
-  setLanguage,
-  setTranslateBook,
-  pointerEvent,
-  setPointerEvent,
-  functionTranslateFrontPage,
-  functionTranslateBackPage,
-  indexPage,
-  functionChangePageBackward,
-  positionPage,
-  setPositionPage,
-  dataBook,
-  widthScreen,
-  functionChangePageForward,
-  navBarLinks,
-  openNav,
-  setOpenNav,
-  move,
-  translate,
-  indexes
-}) => {
-  const [moveResponsive, setMoveResponsive] = useState(false)
+const NavBar = ({ language, onToggleLanguage, isCompact, book }) => {
+  const name = language === 'english' ? 'FRANCISCO TERAN' : 'FRANCISCO TERÁN'
+  const shortName = language === 'english' ? 'F.TERAN' : 'F.TERÁN'
+  const toggleIndex = () => book.actions.toggleIndex(isCompact)
 
-  const nameTilte = () => {
-    if (widthScreen > 992) {
-      if (language === 'english') {
-        return 'FRANCISCO TERAN'
-      } else {
-        return 'FRANCISCO TERÁN'
-      }
-    } else {
-      if (language === 'english') {
-        return 'F.TERAN'
-      } else {
-        return 'F.TERÁN'
-      }
-    }
-  }
-  const indexFunctionBook = () => {
-    if (widthScreen <= 992) {
-      if (!openNav) {
-        functionChangePageForward(2, 0)
-
-        setPositionPage(2)
-        if (widthScreen > 575) {
-          setTranslateBook('50%')
-        } else {
-          setTranslateBook('calc(47vw - 50%)')
-        }
-      } else {
-        functionChangePageBackward(positionPage + 1, positionPage)
-
-        if (dataBook.length === positionPage + 1) {
-          setTranslateBook('calc(47vw - 50%)')
-        }
-        setMoveResponsive(true)
-        setPositionPage(0)
-      }
-    } else {
-      if (positionPage < 2) {
-        if (positionPage === 1 && translate[1] === -180) return
-        if (positionPage === 0 && translate[0] === 0) {
-          functionChangePageForward(2, 0)
-          setTranslateBook('50%')
-        } else { functionChangePageForward(1, 1) }
-      } else {
-        console.log(translate.lastIndexOf(-180) === indexes.indexOf(dataBook.length))
-        if (translate.lastIndexOf(-180) === indexes.indexOf(dataBook.length)) {
-          functionChangePageBackward(positionPage - 1, positionPage)
-        } else {
-          functionChangePageBackward(positionPage - 2, positionPage - 1)
-        }
-
-        if (positionPage + 1 === dataBook.length) {
-          setTranslateBook('50%')
-        }
-      }
-      setPositionPage(1)
-    }
-  }
-  const functionLanguage = () => {
-    language === 'spanish' ? setLanguage('english') : setLanguage('spanish')
-  }
-  useEffect(() => {
-    if ((move, moveResponsive)) {
-      setTranslateBook('0%')
-      setMoveResponsive(false)
-    }
-  }, [move])
   return (
-    <div className=' px-3 px-lg-5   d-flex justify-content-between align-items-center nav-bar  '>
-      <div className='open-container d-flex d-lg-none'>
+    <nav className='px-3 px-lg-5 d-flex justify-content-between align-items-center nav-bar'>
+      <button
+        type='button'
+        aria-label={book.view.isOpen ? 'Close book' : 'Open index'}
+        onClick={toggleIndex}
+        disabled={book.view.isLocked}
+        className='open-container d-flex d-lg-none no-button-styles'
+      >
         <FontAwesomeIcon
-          style={{ pointerEvents: pointerEvent }}
-          onClick={() => {
-            !openNav ? setOpenNav(true) : setOpenNav(false)
-
-            if (!openNav) {
-              setOpenNav(true)
-            }
-            indexFunctionBook()
-          }}
-          className='responsive-open red '
-          icon={!openNav ? faBars : faXmark}
+          className='responsive-open red'
+          icon={book.view.isOpen ? faXmark : faBars}
         />
-      </div>
+      </button>
 
-      <h1 className='text-center  portfolio-name mb-0 '>
-        <a
-          href='/'
-          className='old-letter red link-main-title'
-        >
-
-          {nameTilte()}
+      <h1 className='text-center portfolio-name mb-0'>
+        <a href='/' className='old-letter red link-main-title'>
+          <span className='d-none d-lg-inline'>{name}</span>
+          <span className='d-lg-none'>{shortName}</span>
         </a>
-
       </h1>
 
-      <div className='  d-flex justify-content-around ms-lg-5  align-items-center '>
+      <div className='d-flex justify-content-around ms-lg-5 align-items-center'>
         <button
           type='button'
-          onClick={() => {
-            indexFunctionBook()
-          }}
+          onClick={toggleIndex}
+          disabled={book.view.isLocked}
           className='link-nav text-center dark-brown no-button-styles'
-
         >
-          <span
-            style={{ pointerEvents: pointerEvent }}
-            className='hover-nav-link letter-title-book d-none d-lg-inline-block'
-
-          >
+          <span className='hover-nav-link letter-title-book d-none d-lg-inline-block'>
             {language === 'english' ? 'Index' : 'Índice'}
           </span>
         </button>
 
-        <button
-          type='button'
-          className='py-3 d-flex ms-lg-5  justify-content-center wooden-button letter-title-book'
-          onClick={() => {
-            functionLanguage()
-          }}
+        <WoodenButton
+          className='ms-lg-5'
+          onClick={onToggleLanguage}
         >
           {language === 'english' ? 'Español' : 'English'}
-        </button>
+        </WoodenButton>
       </div>
-    </div>
+    </nav>
   )
 }
 

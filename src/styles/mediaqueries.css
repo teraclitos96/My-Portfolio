@@ -3,9 +3,14 @@
     margin-left: 4em;
   }
 }
-@media (max-width: 992px) {
+@media (max-width: 991.98px) {
   .nav-bar {
     z-index: 1;
+  }
+  .portfolio-name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
   .link-nav {
     margin-top: 2em;
@@ -19,8 +24,8 @@
 @media (max-width: 500px) {
   .book-content {
     min-width: 47.5vw;
-    font-size: 13px;
-    height: 300px;
+    font-size: 14px;
+    height: 25em;
   }
   .nav-bar {
     font-size: 12px;
@@ -31,15 +36,15 @@
     font-size: 9px;
   }
   .book-content {
-    font-size: 9px;
-    height: 23em;
+    font-size: 14px;
+    height: 25em;
   }
 }
 
 @media (max-width: 270px) {
   .book-content {
-    font-size: 7px;
-    height: 24.5em;
+    font-size: 13px;
+    height: 26em;
 
     margin-bottom: 0rem;
   }

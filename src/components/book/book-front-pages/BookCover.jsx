@@ -1,5 +1,3 @@
-import React from 'react'
-
 const BookCover = ({ page }) => {
   return (
     <div className='portada-container d-flex flex-column justify-content-center align-items-center'>
