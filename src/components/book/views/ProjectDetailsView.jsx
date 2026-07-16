@@ -1,15 +1,21 @@
-import ProjectActions from '../ProjectActions'
-import ProjectTechnologyList from './ProjectTechnologyList'
+import { useTranslation } from 'react-i18next'
+import ProjectActions from '../project/ProjectActions'
+import ProjectTechnologyList from '../project/ProjectTechnologyList'
 
-const BookProjectDescription = ({ page, language }) => {
+const ProjectDetailsView = ({ page }) => {
+  const { t } = useTranslation('common')
+
   return (
-    <section className='project-details' aria-label={`${page.project.title} details`}>
+    <section
+      className='project-details'
+      aria-label={t('project.detailsAria', { title: page.project.title })}
+    >
       <p className='letter-body-size text-description project-description'>
         {page.project.description}
       </p>
       <div className='project-stack'>
         <h3 className='project-stack-title letter-title-book'>
-          {language === 'spanish' ? 'Tecnologías' : 'Tech stack'}
+          {t('project.stack')}
         </h3>
         <ProjectTechnologyList technologies={page.project.technologies} />
       </div>
@@ -19,4 +25,4 @@ const BookProjectDescription = ({ page, language }) => {
   )
 }
 
-export default BookProjectDescription
+export default ProjectDetailsView

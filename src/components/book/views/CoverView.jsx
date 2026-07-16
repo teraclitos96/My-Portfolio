@@ -1,4 +1,4 @@
-const BookCover = ({ page }) => {
+const CoverView = ({ page }) => {
   return (
     <div className='portada-container d-flex flex-column justify-content-center align-items-center'>
       <div className='title-book-container'>
@@ -12,11 +12,11 @@ const BookCover = ({ page }) => {
       <img
         className='img-logo-libro'
         src='https://res.cloudinary.com/duuwqmpmn/image/upload/v1685995705/logo-fondo-librorojo_qplqze.png'
-        alt='logo-libro'
+        alt={page.logoAlt}
       />
     </div>
 
   )
 }
 
-export default BookCover
+export default CoverView

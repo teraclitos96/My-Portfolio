@@ -1,42 +1,37 @@
-import { useMemo, useState } from 'react'
 import { Container } from 'react-bootstrap'
 import { Helmet } from 'react-helmet'
+import { useTranslation } from 'react-i18next'
 import Book from '../components/book/Book'
 import Footer from '../components/Footer'
 import Loader from '../components/Loader'
 import NavBar from '../components/NavBar'
 import Technologies from '../components/Technologies'
-import { portfolioContentByLanguage } from '../data/Data'
+import { createPortfolioContent } from '../data/Data'
 import useBook from '../hooks/useBook'
 import useMediaQuery from '../hooks/useMediaQuery'
 import { MEDIA_QUERIES } from '../utils/breakpoints'
 import '../styles/all.css'
 
 const PortfolioPage = () => {
-  const [language, setLanguage] = useState('english')
-  const content = useMemo(() => portfolioContentByLanguage[language], [language])
+  const { t, i18n } = useTranslation(['common', 'book', 'projects'])
+  const language = i18n.resolvedLanguage?.startsWith('es') ? 'es' : 'en'
+  const content = createPortfolioContent({ t })
   const isCompactNavigation = useMediaQuery(MEDIA_QUERIES.compactNavigation)
   const isNarrowBook = useMediaQuery(MEDIA_QUERIES.narrowBook)
   const book = useBook({
-    totalSheetCount: content.pages.length,
+    totalSheetCount: content.sheets.length,
     isNarrowViewport: isNarrowBook
   })
-
-  const toggleLanguage = () => {
-    setLanguage(current => current === 'english' ? 'spanish' : 'english')
-  }
 
   return (
     <>
       <Helmet>
         <title>Francisco Teran</title>
-        <html lang={language === 'english' ? 'en' : 'es'} />
+        <html lang={language} />
       </Helmet>
       <Loader />
       <Container fluid className='min-vh-100 page-main-container pb-5 px-0'>
         <NavBar
-          language={language}
-          onToggleLanguage={toggleLanguage}
           isCompact={isCompactNavigation}
           book={book}
         />
@@ -44,11 +39,11 @@ const PortfolioPage = () => {
           <main className='min-vh-100'>
             <Technologies />
             <div className='d-flex justify-content-center align-items-center'>
-              <Book content={content} language={language} book={book} />
+              <Book content={content} book={book} />
             </div>
           </main>
         </Container>
-        <Footer language={language} />
+        <Footer />
       </Container>
     </>
   )

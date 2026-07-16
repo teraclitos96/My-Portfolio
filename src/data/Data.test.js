@@ -1,8 +1,10 @@
-import { portfolioContentByLanguage } from './Data'
+import i18n from '../i18n'
+import { createPortfolioContent } from './Data'
 import { BOOK_PAGE_NAVIGATION, BOOK_PAGE_TYPE } from '../utils/book'
 
-describe.each(['english', 'spanish'])('%s navigation data', language => {
-  const content = portfolioContentByLanguage[language]
+describe.each(['en', 'es'])('%s navigation data', language => {
+  const t = i18n.getFixedT(language, ['common', 'book', 'projects'])
+  const content = createPortfolioContent({ t })
 
   test('opens the projects list and about page', () => {
     expect(content.index[0].destinationSheet).toBe(4)
@@ -16,27 +18,30 @@ describe.each(['english', 'spanish'])('%s navigation data', language => {
   })
 
   test('keeps the selected projects', () => {
-    expect(content.pages).toHaveLength(10)
+    expect(content.sheets).toHaveLength(10)
     expect(content.projects).toHaveLength(5)
     expect(content.projects[1].id).toBe('indiana-autos')
+    expect(content.sheets.every((sheet, index) => (
+      sheet.id === `sheet${index + 1}`
+    ))).toBe(true)
   })
 
   test('describes page content without relying on sheet positions', () => {
-    const pageTypes = content.pages.flatMap(page => [
-      page.frontPage.type,
-      page.backPage.type
+    const pageTypes = content.sheets.flatMap(sheet => [
+      sheet.frontPage.type,
+      sheet.backPage.type
     ])
 
     expect(pageTypes.every(Boolean)).toBe(true)
-    expect(content.pages[2].frontPage.type).toBe(BOOK_PAGE_TYPE.index)
-    expect(content.pages[4].frontPage.type).toBe(BOOK_PAGE_TYPE.projects)
-    expect(content.pages[4].backPage.navigation).toBe(BOOK_PAGE_NAVIGATION.projects)
+    expect(content.sheets[2].frontPage.type).toBe(BOOK_PAGE_TYPE.index)
+    expect(content.sheets[4].frontPage.type).toBe(BOOK_PAGE_TYPE.projects)
+    expect(content.sheets[4].backPage.navigation).toBe(BOOK_PAGE_NAVIGATION.projects)
   })
 
   test('shares one declarative project between both sides of each spread', () => {
     const projectSpreads = content.projects.map((_, projectIndex) => ({
-      overview: content.pages[projectIndex + 4].backPage.project,
-      details: content.pages[projectIndex + 5].frontPage.project
+      overview: content.sheets[projectIndex + 4].backPage.project,
+      details: content.sheets[projectIndex + 5].frontPage.project
     }))
 
     projectSpreads.forEach(({ overview, details }) => {
@@ -51,16 +56,16 @@ describe.each(['english', 'spanish'])('%s navigation data', language => {
   })
 
   test('does not expose a private Godubi repository', () => {
-    const godubi = content.pages
-      .map(page => page.backPage.project)
+    const godubi = content.sheets
+      .map(sheet => sheet.backPage.project)
       .find(project => project?.id === 'godubi')
 
     expect(godubi.actions.some(action => action.type === 'github')).toBe(false)
   })
 
   test('links the Indiana Autos image and action to its website', () => {
-    const indiana = content.pages
-      .map(page => page.backPage.project)
+    const indiana = content.sheets
+      .map(sheet => sheet.backPage.project)
       .find(project => project?.id === 'indiana-autos')
 
     expect(indiana.image.src).toContain('indiana-autos_vadtnl.png')

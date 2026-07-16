@@ -1,20 +1,20 @@
-import BookAboutMe from './book-back-pages/BookAboutMe'
-import BookPageNavigation from './book-back-pages/BookPageNavigation'
-import BookProjectOverview from './book-back-pages/BookProjectOverview'
-import { BOOK_PAGE_NAVIGATION, BOOK_PAGE_TYPE } from '../../utils/book'
+import AboutView from '../views/AboutView'
+import BookPageNavigation from '../navigation/BookPageNavigation'
+import ProjectOverviewView from '../views/ProjectOverviewView'
+import { BOOK_PAGE_NAVIGATION, BOOK_PAGE_TYPE } from '../../../utils/book'
 
 const renderPageContent = ({ page, downloadCV }) => {
   switch (page.type) {
     case BOOK_PAGE_TYPE.about:
-      return <BookAboutMe page={page} downloadCV={downloadCV} />
+      return <AboutView page={page} downloadCV={downloadCV} />
     case BOOK_PAGE_TYPE.projectOverview:
-      return <BookProjectOverview page={page} />
+      return <ProjectOverviewView page={page} />
     default:
       return null
   }
 }
 
-const BackSheet = ({ sheetIndex, page, language, downloadCV, book }) => {
+const BackFace = ({ sheetIndex, page, downloadCV, book }) => {
   const isBackCover = page.type === BOOK_PAGE_TYPE.backCover
 
   return (
@@ -27,7 +27,6 @@ const BackSheet = ({ sheetIndex, page, language, downloadCV, book }) => {
         {renderPageContent({ page, downloadCV })}
         {page.navigation && (
           <BookPageNavigation
-            language={language}
             handleNavigate={book.actions.goTo}
             sheetIndex={sheetIndex}
             showProjects={page.navigation === BOOK_PAGE_NAVIGATION.projects}
@@ -39,4 +38,4 @@ const BackSheet = ({ sheetIndex, page, language, downloadCV, book }) => {
   )
 }
 
-export default BackSheet
+export default BackFace

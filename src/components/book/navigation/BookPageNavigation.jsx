@@ -1,29 +1,12 @@
+import { useTranslation } from 'react-i18next'
 import { BOOK_SHEET } from '../../../utils/book'
 
-const labelsByLanguage = {
-  english: {
-    navigation: 'Book page navigation',
-    index: '← Index',
-    indexAriaLabel: 'Back to index',
-    projects: 'All projects',
-    projectsAriaLabel: 'View all projects'
-  },
-  spanish: {
-    navigation: 'Navegación del libro',
-    index: '← Índice',
-    indexAriaLabel: 'Volver al índice',
-    projects: 'Todos los proyectos',
-    projectsAriaLabel: 'Ver todos los proyectos'
-  }
-}
-
 const BookPageNavigation = ({
-  language,
   handleNavigate,
   sheetIndex,
   showProjects = false
 }) => {
-  const labels = labelsByLanguage[language]
+  const { t } = useTranslation('book')
 
   const navigateTo = ({ event, destinationSheet }) => {
     event.stopPropagation()
@@ -33,25 +16,25 @@ const BookPageNavigation = ({
   return (
     <nav
       className='book-page-navigation'
-      aria-label={labels.navigation}
+      aria-label={t('navigation.label')}
       data-book-sheet-navigation={sheetIndex}
     >
       <button
         type='button'
         className='book-page-navigation-link letter-title-book no-button-styles'
-        aria-label={labels.indexAriaLabel}
+        aria-label={t('navigation.indexAriaLabel')}
         onClick={event => navigateTo({ event, destinationSheet: BOOK_SHEET.index })}
       >
-        {labels.index}
+        {t('navigation.index')}
       </button>
       {showProjects && (
         <button
           type='button'
           className='book-page-navigation-link letter-title-book no-button-styles'
-          aria-label={labels.projectsAriaLabel}
+          aria-label={t('navigation.projectsAriaLabel')}
           onClick={event => navigateTo({ event, destinationSheet: BOOK_SHEET.projects })}
         >
-          {labels.projects}
+          {t('navigation.projects')}
         </button>
       )}
     </nav>

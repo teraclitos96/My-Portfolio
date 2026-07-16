@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
-import WoodenButton from '../WoodenButton'
-import { getLinkTarget } from '../../utils/links'
+import WoodenButton from '../../WoodenButton'
+import { getLinkTarget } from '../../../utils/links'
 
 const ProjectActions = ({ actions, projectTitle }) => (
   <div className='project-actions d-flex justify-content-center flex-wrap' onClick={event => event.stopPropagation()}>

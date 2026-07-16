@@ -1,4 +1,4 @@
-const BookIndex = ({ item, handleNavigate }) => {
+const IndexNavigationItem = ({ item, handleNavigate }) => {
   return (
     <li>
       {item.href
@@ -27,4 +27,4 @@ const BookIndex = ({ item, handleNavigate }) => {
   )
 }
 
-export default BookIndex
+export default IndexNavigationItem
