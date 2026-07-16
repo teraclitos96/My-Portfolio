@@ -1,7 +1,4 @@
-import MailIcon from './MailIcon'
-import GitHubIcon from './GitHubIcon'
-import LinkedinIcon from './LinkedinIcon'
-import WhatsupIcon from './WhatsupIcon'
+import SocialLinks from './SocialLinks'
 import '../styles/all.css'
 
 const Footer = ({ language }) => {
@@ -14,12 +11,7 @@ const Footer = ({ language }) => {
           alt='logo-footer'
         />
       </a>
-      <div className='d-flex justify-content center icon-footer-container'>
-        <MailIcon />
-        <GitHubIcon />
-        <LinkedinIcon />
-        <WhatsupIcon language={language} />
-      </div>
+      <SocialLinks language={language} />
     </footer>
   )
 }
