@@ -1,18 +1,18 @@
-import BookBiography from './book-front-pages/BookBiography'
-import BookCover from './book-front-pages/BookCover'
-import BookInnerCover from './book-front-pages/BookInnerCover'
-import BookNavigationPage from './book-front-pages/BookNavigationPage'
-import BookProjectDescription from './book-front-pages/BookProjectDescription'
-import { BOOK_PAGE_TYPE } from '../../utils/book'
+import BiographyView from '../views/BiographyView'
+import CoverView from '../views/CoverView'
+import InnerCoverView from '../views/InnerCoverView'
+import NavigationView from '../views/NavigationView'
+import ProjectDetailsView from '../views/ProjectDetailsView'
+import { BOOK_PAGE_TYPE } from '../../../utils/book'
 
-const renderPageContent = ({ page, sheetIndex, content, language, book }) => {
+const renderPageContent = ({ page, sheetIndex, content, book }) => {
   switch (page.type) {
     case BOOK_PAGE_TYPE.innerCover:
-      return <BookInnerCover page={page} />
+      return <InnerCoverView page={page} />
     case BOOK_PAGE_TYPE.index:
     case BOOK_PAGE_TYPE.projects:
       return (
-        <BookNavigationPage
+        <NavigationView
           page={page}
           sheetIndex={sheetIndex}
           content={content}
@@ -20,15 +20,15 @@ const renderPageContent = ({ page, sheetIndex, content, language, book }) => {
         />
       )
     case BOOK_PAGE_TYPE.biography:
-      return <BookBiography page={page} />
+      return <BiographyView page={page} />
     case BOOK_PAGE_TYPE.projectDetails:
-      return <BookProjectDescription page={page} language={language} />
+      return <ProjectDetailsView page={page} />
     default:
       return null
   }
 }
 
-const FrontSheet = ({ sheetIndex, page, content, language, book }) => {
+const FrontFace = ({ sheetIndex, page, content, book }) => {
   const isCover = page.type === BOOK_PAGE_TYPE.cover
 
   return (
@@ -38,14 +38,13 @@ const FrontSheet = ({ sheetIndex, page, content, language, book }) => {
       style={{ pointerEvents: book.view.pointerEvents }}
     >
       {isCover
-        ? <BookCover page={page} />
+        ? <CoverView page={page} />
         : (
           <div className={`front-sheet-content front-sheet-content--${page.type}`}>
             {renderPageContent({
               page,
               sheetIndex,
               content,
-              language,
               book
             })}
           </div>
@@ -54,4 +53,4 @@ const FrontSheet = ({ sheetIndex, page, content, language, book }) => {
   )
 }
 
-export default FrontSheet
+export default FrontFace

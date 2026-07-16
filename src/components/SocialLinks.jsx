@@ -1,23 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedin, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-
-const labelsByLanguage = {
-  english: {
-    navigation: 'Social links',
-    email: 'Send email',
-    github: 'View GitHub profile',
-    linkedin: 'View LinkedIn profile',
-    whatsapp: 'Contact via WhatsApp'
-  },
-  spanish: {
-    navigation: 'Enlaces sociales',
-    email: 'Enviar correo electrónico',
-    github: 'Ver perfil de GitHub',
-    linkedin: 'Ver perfil de LinkedIn',
-    whatsapp: 'Contactar por WhatsApp'
-  }
-}
+import { useTranslation } from 'react-i18next'
 
 const socialLinks = [
   {
@@ -40,28 +24,29 @@ const socialLinks = [
   {
     id: 'whatsapp',
     hrefByLanguage: {
-      english: 'https://wa.link/otcpwg',
-      spanish: 'https://wa.link/ibnibl'
+      en: 'https://wa.link/otcpwg',
+      es: 'https://wa.link/ibnibl'
     },
     icon: faWhatsapp,
     external: true
   }
 ]
 
-const SocialLinks = ({ language }) => {
-  const labels = labelsByLanguage[language]
+const SocialLinks = () => {
+  const { t, i18n } = useTranslation('common')
+  const language = i18n.resolvedLanguage?.startsWith('es') ? 'es' : 'en'
 
   return (
     <nav
       className='d-flex justify-content center icon-footer-container'
-      aria-label={labels.navigation}
+      aria-label={t('social.navigation')}
     >
       {socialLinks.map(link => (
         <a
           key={link.id}
           className='icon-footer-link'
           href={link.hrefByLanguage?.[language] ?? link.href}
-          aria-label={labels[link.id]}
+          aria-label={t(`social.${link.id}`)}
           {...(link.external ? { target: '_blank', rel: 'noreferrer' } : {})}
         >
           <FontAwesomeIcon className='icon-footer' icon={link.icon} />

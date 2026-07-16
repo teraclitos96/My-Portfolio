@@ -1,6 +1,6 @@
 import { getLinkTarget } from '../../../utils/links'
 
-const BookProjectOverview = ({ page }) => {
+const ProjectOverviewView = ({ page }) => {
   const { project } = page
   const websiteAction = project.actions.find(action => action.type === 'website')
   const projectImage = <img className='project-image' src={project.image.src} alt={project.image.alt} />
@@ -33,4 +33,4 @@ const BookProjectOverview = ({ page }) => {
   )
 }
 
-export default BookProjectOverview
+export default ProjectOverviewView

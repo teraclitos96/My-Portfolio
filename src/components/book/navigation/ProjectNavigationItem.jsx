@@ -1,4 +1,4 @@
-const BookProjectsList = ({ project, handleNavigate }) => {
+const ProjectNavigationItem = ({ project, handleNavigate }) => {
   return (
     <li>
       <button
@@ -15,4 +15,4 @@ const BookProjectsList = ({ project, handleNavigate }) => {
   )
 }
 
-export default BookProjectsList
+export default ProjectNavigationItem

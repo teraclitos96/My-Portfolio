@@ -1,194 +1,100 @@
-const sharedLinks = {
-  architecture: {
-    website: 'https://diegohelguera.com/',
-    github: 'https://github.com/teraclitos/Portafolio-Diego-Helguera'
-  },
-  godubi: {
-    website: 'https://godubi.com/'
-  },
-  indiana: {
-    website: 'https://indiana.com.ar/'
-  },
-  nonighter: {
-    website: 'https://nonighter.com/'
-  },
-  portfolio: {
-    website: 'https://franciscoteran.vercel.app/',
-    github: 'https://github.com/teraclitos/My-Portfolio'
-  }
-}
-
-const sharedImages = {
-  architecture: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1685548879/portfolio_diego_foto_gae0mw.png',
-  godubi: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227820/godubi_sn9xtx.png',
-  indiana: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227668/indiana-autos_vadtnl.png',
-  nonighter: '/images/nonighter-placeholder.svg',
-  portfolio: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784228347/my-portfolio_utoqzt.png'
-}
-
-const projectsEnglish = [
+const projectDefinitions = [
   {
     id: 'architecture-portfolio',
-    navigationLabel: 'Architecture Portfolio',
-    title: 'Architecture Portfolio',
-    subtitle: 'Architecture studio website',
-    description: 'Built a responsive portfolio for an architecture studio with a custom visual composition, interactive project gallery and image zoom. Created a tailored layout that preserves the original art direction across screen sizes.',
-    image: {
-      src: sharedImages.architecture,
-      alt: 'Architecture studio portfolio project gallery'
-    },
+    translationKey: 'architecture',
+    imageSrc: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1685548879/portfolio_diego_foto_gae0mw.png',
     technologies: ['HTML5', 'CSS3', 'JavaScript'],
     actions: [
-      { label: 'GitHub', href: sharedLinks.architecture.github, type: 'github' },
-      { label: 'Visit Website', href: sharedLinks.architecture.website, type: 'website' }
+      {
+        labelKey: 'github',
+        href: 'https://github.com/teraclitos/Portafolio-Diego-Helguera',
+        type: 'github'
+      },
+      {
+        labelKey: 'website',
+        href: 'https://diegohelguera.com/',
+        type: 'website'
+      }
     ]
   },
   {
     id: 'indiana-autos',
-    navigationLabel: 'Indiana Autos',
-    title: 'Indiana Autos',
-    subtitle: 'Vehicle marketplace backend',
-    description: 'Developed and maintained the backend for a vehicle publishing and management platform. Built CRUD APIs, dynamic filters, pagination and sorting with Node.js, Express, MongoDB and Mongoose; managed vehicle images through Multer and Cloudinary, redesigned discount pricing, and implemented contact emails, validation, centralized errors and protected admin endpoints.',
-    image: {
-      src: sharedImages.indiana,
-      alt: 'Indiana Autos vehicle marketplace'
-    },
+    translationKey: 'indiana',
+    imageSrc: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227668/indiana-autos_vadtnl.png',
     technologies: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'Cloudinary'],
     actions: [
-      { label: 'Visit Website', href: sharedLinks.indiana.website, type: 'website' }
+      {
+        labelKey: 'website',
+        href: 'https://indiana.com.ar/',
+        type: 'website'
+      }
     ]
   },
   {
     id: 'godubi',
-    navigationLabel: 'Godubi',
-    title: 'Godubi',
-    subtitle: 'Collaborative Work Platform · Sep 2023 – Jan 2025',
-    description: 'Built frontend workflows for a collaborative work platform, including activity feeds, files, task boards, calendars, meetings and real-time chat. Centralized application state in Vuex and implemented WebSocket and payment-related integrations.',
-    image: {
-      src: sharedImages.godubi,
-      alt: 'Godubi collaborative work platform dashboard'
-    },
+    translationKey: 'godubi',
+    imageSrc: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227820/godubi_sn9xtx.png',
     technologies: ['Vue 2', 'Vuex', 'Vuexy', 'WebSockets'],
     actions: [
-      { label: 'Visit Website', href: sharedLinks.godubi.website, type: 'website' }
+      {
+        labelKey: 'website',
+        href: 'https://godubi.com/',
+        type: 'website'
+      }
     ]
   },
   {
     id: 'nonighter-excel-add-in',
-    navigationLabel: 'NoNighter',
-    title: 'NoNighter — Excel Add-in',
-    subtitle: 'Financial modeling Excel add-in · Jan 2025 – Jul 2026',
-    description: 'Developed features for a Microsoft Excel add-in used in professional financial modeling. Built React, Office.js and Fluent UI interfaces integrated with AWS and DynamoDB services, and improved observability with Grafana Faro.',
-    image: {
-      src: sharedImages.nonighter,
-      alt: 'Generic preview for the NoNighter Microsoft Excel add-in'
-    },
+    translationKey: 'nonighter',
+    imageSrc: '/images/nonighter-placeholder.svg',
     technologies: ['React', 'Office.js', 'Fluent UI', 'AWS', 'DynamoDB'],
     actions: [
-      { label: 'Visit Website', href: sharedLinks.nonighter.website, type: 'website' }
+      {
+        labelKey: 'website',
+        href: 'https://nonighter.com/',
+        type: 'website'
+      }
     ]
   },
   {
     id: 'my-portfolio',
-    navigationLabel: 'My Portfolio',
-    title: 'My Portfolio',
-    subtitle: 'Interactive developer portfolio',
-    description: 'Designed and built an interactive book-inspired portfolio with animated page navigation, responsive layouts and bilingual content. Refactored the page-turning behavior into reusable components and native React hooks while preserving its literary visual identity.',
-    image: {
-      src: sharedImages.portfolio,
-      alt: 'Interactive book-inspired developer portfolio'
-    },
+    translationKey: 'portfolio',
+    imageSrc: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784228347/my-portfolio_utoqzt.png',
     technologies: ['React', 'React Router', 'Bootstrap'],
     actions: [
-      { label: 'GitHub', href: sharedLinks.portfolio.github, type: 'github' },
-      { label: 'View Project', href: sharedLinks.portfolio.website, type: 'website' }
+      {
+        labelKey: 'github',
+        href: 'https://github.com/teraclitos/My-Portfolio',
+        type: 'github'
+      },
+      {
+        labelKey: 'viewProject',
+        href: 'https://franciscoteran.vercel.app/',
+        type: 'website'
+      }
     ]
   }
 ]
 
-const projectsSpanish = [
-  {
-    id: 'architecture-portfolio',
-    navigationLabel: 'Portfolio de arquitectura',
-    title: 'Portfolio de arquitectura',
-    subtitle: 'Sitio web para estudio de arquitectura',
-    description: 'Desarrollé un portfolio responsive para un estudio de arquitectura, con composición visual personalizada, galería interactiva y zoom de imágenes. Creé un layout que conserva la dirección artística original en distintos tamaños de pantalla.',
+const createProjects = ({ t }) => projectDefinitions.map(project => {
+  const translationPath = `projects:${project.translationKey}`
+
+  return {
+    id: project.id,
+    navigationLabel: t(`${translationPath}.navigationLabel`),
+    title: t(`${translationPath}.title`),
+    subtitle: t(`${translationPath}.subtitle`),
+    description: t(`${translationPath}.description`),
     image: {
-      src: sharedImages.architecture,
-      alt: 'Galería de proyectos del portfolio de un estudio de arquitectura'
+      src: project.imageSrc,
+      alt: t(`${translationPath}.imageAlt`)
     },
-    technologies: ['HTML5', 'CSS3', 'JavaScript'],
-    actions: [
-      { label: 'GitHub', href: sharedLinks.architecture.github, type: 'github' },
-      { label: 'Visitar sitio', href: sharedLinks.architecture.website, type: 'website' }
-    ]
-  },
-  {
-    id: 'indiana-autos',
-    navigationLabel: 'Indiana Autos',
-    title: 'Indiana Autos',
-    subtitle: 'Backend para plataforma de vehículos',
-    description: 'Desarrollé y mantuve el backend de una plataforma para publicar y administrar vehículos. Implementé APIs CRUD, filtros dinámicos, paginación y ordenamiento con Node.js, Express, MongoDB y Mongoose; gestioné imágenes con Multer y Cloudinary, rediseñé los descuentos e incorporé correos de contacto, validaciones, errores centralizados y protección de endpoints administrativos.',
-    image: {
-      src: sharedImages.indiana,
-      alt: 'Plataforma de vehículos Indiana Autos'
-    },
-    technologies: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'Cloudinary'],
-    actions: [
-      { label: 'Visitar sitio', href: sharedLinks.indiana.website, type: 'website' }
-    ]
-  },
-  {
-    id: 'godubi',
-    navigationLabel: 'Godubi',
-    title: 'Godubi',
-    subtitle: 'Plataforma de trabajo colaborativo · Sep 2023 – Ene 2025',
-    description: 'Desarrollé flujos para una plataforma de trabajo colaborativo, incluyendo actividad, archivos, tareas, calendarios, reuniones y chat en tiempo real. Centralicé el estado en Vuex e implementé integraciones con WebSockets y pagos.',
-    image: {
-      src: sharedImages.godubi,
-      alt: 'Panel de la plataforma de trabajo colaborativo Godubi'
-    },
-    technologies: ['Vue 2', 'Vuex', 'Vuexy', 'WebSockets'],
-    actions: [
-      { label: 'Visitar sitio', href: sharedLinks.godubi.website, type: 'website' }
-    ]
-  },
-  {
-    id: 'nonighter-excel-add-in',
-    navigationLabel: 'NoNighter',
-    title: 'NoNighter — Complemento de Excel',
-    subtitle: 'Complemento de Excel para modelado financiero · Ene 2025 – Jul 2026',
-    description: 'Desarrollé funcionalidades para un complemento de Microsoft Excel usado en modelado financiero profesional. Construí interfaces con React, Office.js y Fluent UI, integradas con servicios en AWS y DynamoDB, y mejoré la observabilidad con Grafana Faro.',
-    image: {
-      src: sharedImages.nonighter,
-      alt: 'Vista genérica del complemento de Microsoft Excel de NoNighter'
-    },
-    technologies: ['React', 'Office.js', 'Fluent UI', 'AWS', 'DynamoDB'],
-    actions: [
-      { label: 'Visitar sitio', href: sharedLinks.nonighter.website, type: 'website' }
-    ]
-  },
-  {
-    id: 'my-portfolio',
-    navigationLabel: 'Mi portfolio',
-    title: 'Mi portfolio',
-    subtitle: 'Portfolio interactivo para desarrolladores',
-    description: 'Diseñé y desarrollé un portfolio interactivo inspirado en un libro, con navegación animada, diseño responsive y contenido bilingüe. Refactoricé el cambio de páginas en componentes reutilizables y hooks nativos, conservando su identidad visual literaria.',
-    image: {
-      src: sharedImages.portfolio,
-      alt: 'Portfolio interactivo para desarrolladores inspirado en un libro'
-    },
-    technologies: ['React', 'React Router', 'Bootstrap'],
-    actions: [
-      { label: 'GitHub', href: sharedLinks.portfolio.github, type: 'github' },
-      { label: 'Ver proyecto', href: sharedLinks.portfolio.website, type: 'website' }
-    ]
+    technologies: project.technologies,
+    actions: project.actions.map(({ labelKey, ...action }) => ({
+      ...action,
+      label: t(`common:actions.${labelKey}`)
+    }))
   }
-]
+})
 
-const projectsByLanguage = {
-  english: projectsEnglish,
-  spanish: projectsSpanish
-}
-
-export { projectsByLanguage }
+export { createProjects }

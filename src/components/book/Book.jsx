@@ -1,16 +1,17 @@
-import FrontSheet from './FrontSheet'
-import BackSheet from './BackSheet'
+import FrontFace from './sheets/FrontFace'
+import BackFace from './sheets/BackFace'
 import { BOOK_DIRECTION } from '../../utils/book'
+import { useTranslation } from 'react-i18next'
 import '../../styles/all.css'
 
-const getSheetContent = ({ content, index, transition }) => {
-  const sheet = content.pages[index]
+const getSheetContent = ({ content, sheetIndex, transition }) => {
+  const sheet = content.sheets[sheetIndex]
 
-  if (!transition || index !== transition.turningSheetIndex) {
+  if (!transition || sheetIndex !== transition.turningSheetIndex) {
     return {
-      backIndex: index,
+      backSheetIndex: sheetIndex,
       backPage: sheet.backPage,
-      frontIndex: index,
+      frontSheetIndex: sheetIndex,
       frontPage: sheet.frontPage
     }
   }
@@ -19,9 +20,9 @@ const getSheetContent = ({ content, index, transition }) => {
     const destinationIndex = transition.targetSheet - 1
 
     return {
-      backIndex: destinationIndex,
-      backPage: content.pages[destinationIndex].backPage,
-      frontIndex: index,
+      backSheetIndex: destinationIndex,
+      backPage: content.sheets[destinationIndex].backPage,
+      frontSheetIndex: sheetIndex,
       frontPage: sheet.frontPage
     }
   }
@@ -29,50 +30,49 @@ const getSheetContent = ({ content, index, transition }) => {
   const destinationIndex = transition.targetSheet
 
   return {
-    backIndex: index,
+    backSheetIndex: sheetIndex,
     backPage: sheet.backPage,
-    frontIndex: destinationIndex,
-    frontPage: content.pages[destinationIndex].frontPage
+    frontSheetIndex: destinationIndex,
+    frontPage: content.sheets[destinationIndex].frontPage
   }
 }
 
-const Book = ({ content, language, book }) => {
+const Book = ({ content, book }) => {
+  const { t } = useTranslation('common')
   const downloadCV = () => window.open(`${process.env.PUBLIC_URL}${content.cvFile}`)
 
   return (
     <section
-      aria-label={language === 'spanish' ? 'Portfolio en forma de libro' : 'Book portfolio'}
+      aria-label={t('portfolio.bookAria')}
       style={{ transform: book.view.transform }}
       className='book-content'
     >
-      {content.pages.map((sheet, index) => {
+      {content.sheets.map((sheet, sheetIndex) => {
         const sheetContent = getSheetContent({
           content,
-          index,
+          sheetIndex,
           transition: book.view.navigationTransition
         })
 
         return (
           <article
             key={sheet.id}
-            style={book.view.sheetStyles[index]}
+            style={book.view.sheetStyles[sheetIndex]}
             className='book'
             onTransitionEnd={event => book.actions.handleSheetTransitionEnd({
               event,
-              sheetIndex: index
+              sheetIndex
             })}
           >
-            <FrontSheet
-              sheetIndex={sheetContent.frontIndex}
+            <FrontFace
+              sheetIndex={sheetContent.frontSheetIndex}
               page={sheetContent.frontPage}
               content={content}
-              language={language}
               book={book}
             />
-            <BackSheet
-              sheetIndex={sheetContent.backIndex}
+            <BackFace
+              sheetIndex={sheetContent.backSheetIndex}
               page={sheetContent.backPage}
-              language={language}
               downloadCV={downloadCV}
               book={book}
             />

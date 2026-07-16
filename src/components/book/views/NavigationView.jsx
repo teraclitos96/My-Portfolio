@@ -1,8 +1,8 @@
 import { BOOK_PAGE_TYPE } from '../../../utils/book'
-import BookIndex from './BookIndex'
-import BookProjectsList from './BookProjectsList'
+import IndexNavigationItem from '../navigation/IndexNavigationItem'
+import ProjectNavigationItem from '../navigation/ProjectNavigationItem'
 
-const BookNavigationPage = ({ page, sheetIndex, content, handleNavigate }) => {
+const NavigationView = ({ page, sheetIndex, content, handleNavigate }) => {
   const isIndex = page.type === BOOK_PAGE_TYPE.index
 
   return (
@@ -16,14 +16,14 @@ const BookNavigationPage = ({ page, sheetIndex, content, handleNavigate }) => {
       >
         {isIndex
           ? content.index.map(item => (
-            <BookIndex
+            <IndexNavigationItem
               key={item.id}
               item={item}
               handleNavigate={handleNavigate}
             />
           ))
           : content.projects.map(project => (
-            <BookProjectsList
+            <ProjectNavigationItem
               key={project.id}
               project={project}
               handleNavigate={handleNavigate}
@@ -35,4 +35,4 @@ const BookNavigationPage = ({ page, sheetIndex, content, handleNavigate }) => {
   )
 }
 
-export default BookNavigationPage
+export default NavigationView

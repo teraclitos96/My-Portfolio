@@ -1,4 +1,4 @@
-const BookInnerCover = ({ page }) => {
+const InnerCoverView = ({ page }) => {
   return (
     <div className='book-title-container '>
       <h5 className='text-center mt-3 sub-title-size letter-book-title'>
@@ -12,4 +12,4 @@ const BookInnerCover = ({ page }) => {
   )
 }
 
-export default BookInnerCover
+export default InnerCoverView
