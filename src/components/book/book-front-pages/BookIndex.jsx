@@ -1,11 +1,15 @@
-import BookLinkToMail from './BookLinkToMail'
-
-const BookIndex = ({ item, handleNavigate, index }) => {
+const BookIndex = ({ item, handleNavigate }) => {
   return (
     <li>
-      {index === 2
+      {item.href
         ? (
-          <BookLinkToMail item={item} />
+          <a
+            className='mb-2 projects letter-title-book contact-link'
+            href={item.href}
+            onClick={event => event.stopPropagation()}
+          >
+            {item.title}
+          </a>
           )
         : (
           <button
@@ -13,7 +17,7 @@ const BookIndex = ({ item, handleNavigate, index }) => {
             className='mb-2  projects letter-title-book no-button-styles'
             onClick={(e) => {
               e.stopPropagation()
-              handleNavigate(item.destinationPage)
+              handleNavigate(item.destinationSheet)
             }}
           >
             {item.title}

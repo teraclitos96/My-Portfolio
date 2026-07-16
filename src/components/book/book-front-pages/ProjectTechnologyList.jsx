@@ -2,17 +2,31 @@ import { FaAws, FaBootstrap, FaCss3Alt, FaHtml5, FaReact, FaVuejs } from 'react-
 import { IoLogoJavascript } from 'react-icons/io'
 import { MdCable, MdDashboardCustomize, MdWidgets } from 'react-icons/md'
 import { RiVuejsFill } from 'react-icons/ri'
-import { SiAmazondynamodb, SiMicrosoft, SiReactrouter } from 'react-icons/si'
+import {
+  SiAmazondynamodb,
+  SiCloudinary,
+  SiExpress,
+  SiMicrosoft,
+  SiMongodb,
+  SiMongoose,
+  SiNodedotjs,
+  SiReactrouter
+} from 'react-icons/si'
 import { Tooltip } from 'react-tooltip'
 
 const technologyIcons = {
   AWS: FaAws,
   Bootstrap: FaBootstrap,
+  Cloudinary: SiCloudinary,
   CSS3: FaCss3Alt,
   DynamoDB: SiAmazondynamodb,
+  Express: SiExpress,
   'Fluent UI': MdWidgets,
   HTML5: FaHtml5,
   JavaScript: IoLogoJavascript,
+  MongoDB: SiMongodb,
+  Mongoose: SiMongoose,
+  'Node.js': SiNodedotjs,
   'Office.js': SiMicrosoft,
   React: FaReact,
   'React Router': SiReactrouter,

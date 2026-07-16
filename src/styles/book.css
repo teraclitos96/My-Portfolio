@@ -51,6 +51,13 @@
   box-sizing: border-box;
   height: 100%;
 }
+.front-sheet-content {
+  padding-top: 1rem;
+}
+.front-sheet-content--biography,
+.front-sheet-content--project-details {
+  padding-top: 0;
+}
 
 .portada,
 .portada-back {

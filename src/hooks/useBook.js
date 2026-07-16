@@ -7,7 +7,8 @@ import {
   useState
 } from 'react'
 import {
-  BOOK_PAGE,
+  BOOK_DIRECTION,
+  BOOK_SHEET,
   clamp,
   createSheetStyles,
   createVirtualNavigationStyles,
@@ -32,7 +33,8 @@ const matchesTarget = ({ target, selector }) => (
 )
 
 const useBook = ({ totalSheetCount, isNarrowViewport }) => {
-  const [flippedSheetCount, setFlippedSheetCount] = useState(0)
+  // Book position: 0 is closed; each increment means one more sheet has turned.
+  const [currentSheet, setCurrentSheet] = useState(0)
   const [activeSheetIndex, setActiveSheetIndex] = useState(0)
   const [navigationTransition, setNavigationTransition] = useState(null)
   const [isLocked, setIsLocked] = useState(false)
@@ -58,7 +60,7 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
     transitionState.current = null
     setIsLocked(false)
     setNavigationTransition(null)
-    setFlippedSheetCount(0)
+    setCurrentSheet(0)
     setActiveSheetIndex(0)
   }, [totalSheetCount, clearScheduledWork])
 
@@ -90,7 +92,7 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
     }
 
     transitionState.current = settlingTransition
-    setFlippedSheetCount(transition.targetPage)
+    setCurrentSheet(transition.targetSheet)
     setNavigationTransition(settlingTransition)
 
     const settleFrame = window.requestAnimationFrame(() => {
@@ -117,35 +119,38 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
     timers.current.push(fallbackTimer)
   }, [completeTurn])
 
-  const goTo = useCallback((destinationPage) => {
+  const goTo = useCallback((destinationSheet) => {
     if (lock.current) return
 
-    const targetPage = clamp({
-      value: destinationPage,
+    const targetSheet = clamp({
+      value: destinationSheet,
       minimum: 0,
       maximum: totalSheetCount
     })
-    if (targetPage === flippedSheetCount) return
+    if (targetSheet === currentSheet) return
 
     clearBookNavigationFocus()
     lock.current = true
     setIsLocked(true)
 
-    const direction = targetPage > flippedSheetCount ? 1 : -1
-    const isAdjacentPage = Math.abs(targetPage - flippedSheetCount) === 1
-    const nextActiveSheetIndex = direction > 0 ? targetPage - 1 : targetPage
+    const direction = targetSheet > currentSheet
+      ? BOOK_DIRECTION.forward
+      : BOOK_DIRECTION.backward
+    const isAdjacentSheet = Math.abs(targetSheet - currentSheet) === 1
+    const isMovingForward = direction === BOOK_DIRECTION.forward
+    const nextActiveSheetIndex = isMovingForward ? targetSheet - 1 : targetSheet
     activeSheet.current = nextActiveSheetIndex
     setActiveSheetIndex(nextActiveSheetIndex)
 
-    if (!isAdjacentPage) {
+    if (!isAdjacentSheet) {
       const transition = {
-        currentPage: flippedSheetCount,
+        currentSheet,
         direction,
         isTurning: false,
-        targetPage,
-        turningSheetIndex: direction > 0
-          ? flippedSheetCount
-          : flippedSheetCount - 1
+        targetSheet,
+        turningSheetIndex: isMovingForward
+          ? currentSheet
+          : currentSheet - 1
       }
 
       transitionState.current = transition
@@ -166,9 +171,9 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
       return
     }
 
-    setFlippedSheetCount(targetPage)
+    setCurrentSheet(targetSheet)
     scheduleFallback()
-  }, [flippedSheetCount, scheduleFallback, totalSheetCount])
+  }, [currentSheet, scheduleFallback, totalSheetCount])
 
   const handleSheetTransitionEnd = useCallback(({ event, sheetIndex }) => {
     const isSheetTransform = event.target === event.currentTarget &&
@@ -178,13 +183,13 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
   }, [completeTurn])
 
   useLayoutEffect(() => {
-    const focusPage = navigationTransition?.targetPage ?? flippedSheetCount
+    const focusSheet = navigationTransition?.targetSheet ?? currentSheet
 
     focusFirstBookListItem({
-      currentPage: focusPage,
-      preferLastList: navigationTransition?.direction < 0
+      currentSheet: focusSheet,
+      preferLastList: navigationTransition?.direction === BOOK_DIRECTION.backward
     })
-  }, [flippedSheetCount, navigationTransition])
+  }, [currentSheet, navigationTransition])
 
   useEffect(() => {
     const handleKeyDown = event => {
@@ -193,9 +198,9 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
 
       if (event.key === 'ArrowDown') {
         const didMoveListFocus = !lock.current &&
-          moveBookListFocus({ currentPage: flippedSheetCount, direction: 1 })
+          moveBookListFocus({ currentSheet, direction: 1 })
         const didFocusPageNavigation = !didMoveListFocus && !lock.current &&
-          focusFirstBookPageNavigationItem({ currentPage: flippedSheetCount })
+          focusFirstBookPageNavigationItem({ currentSheet })
 
         if (didFocusPageNavigation || didMoveListFocus) event.preventDefault()
         return
@@ -209,7 +214,7 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
         }
 
         const didMoveFocus = !lock.current && moveBookListFocus({
-          currentPage: flippedSheetCount,
+          currentSheet,
           direction: -1
         })
 
@@ -221,11 +226,11 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
         event.preventDefault()
         if (isBookPageNavigationFocused()) {
           moveBookPageNavigationFocus({
-            currentPage: flippedSheetCount,
+            currentSheet,
             direction: 1
           })
         } else {
-          goTo(flippedSheetCount + 1)
+          goTo(currentSheet + 1)
         }
         return
       }
@@ -234,28 +239,28 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
         event.preventDefault()
         if (isBookPageNavigationFocused()) {
           moveBookPageNavigationFocus({
-            currentPage: flippedSheetCount,
+            currentSheet,
             direction: -1
           })
         } else {
-          goTo(flippedSheetCount - 1)
+          goTo(currentSheet - 1)
         }
         return
       }
 
       const shouldOpenClosedBook = event.key === 'Enter' &&
-        flippedSheetCount === 0 &&
+        currentSheet === 0 &&
         !matchesTarget({ target: event.target, selector: INTERACTIVE_SELECTOR })
 
       if (shouldOpenClosedBook) {
         event.preventDefault()
-        goTo(BOOK_PAGE.index)
+        goTo(BOOK_SHEET.index)
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [flippedSheetCount, goTo])
+  }, [currentSheet, goTo])
 
   const actions = useMemo(() => ({
     turnForward: sheetIndex => goTo(sheetIndex + 1),
@@ -263,21 +268,21 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
     goTo,
     handleSheetTransitionEnd,
     toggleIndex: isMobileNav => {
-      if (isMobileNav && flippedSheetCount > 0) goTo(0)
-      else goTo(BOOK_PAGE.index)
+      if (isMobileNav && currentSheet > 0) goTo(0)
+      else goTo(BOOK_SHEET.index)
     }
-  }), [flippedSheetCount, goTo, handleSheetTransitionEnd])
+  }), [currentSheet, goTo, handleSheetTransitionEnd])
 
   const view = useMemo(() => ({
-    currentPage: flippedSheetCount,
+    currentSheet,
     isLocked,
-    isOpen: flippedSheetCount > 0,
+    isOpen: currentSheet > 0,
     pointerEvents: isLocked ? 'none' : 'all',
     transform: getBookTransform({
       isNarrowViewport,
-      flippedSheetCount: navigationTransition?.isTurning
-        ? navigationTransition.targetPage
-        : flippedSheetCount,
+      currentSheet: navigationTransition?.isTurning
+        ? navigationTransition.targetSheet
+        : currentSheet,
       totalSheetCount
     }),
     navigationTransition,
@@ -288,12 +293,12 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
       })
       : createSheetStyles({
         totalSheetCount,
-        flippedSheetCount,
+        currentSheet,
         activeSheetIndex
       })
   }), [
     activeSheetIndex,
-    flippedSheetCount,
+    currentSheet,
     isLocked,
     isNarrowViewport,
     navigationTransition,

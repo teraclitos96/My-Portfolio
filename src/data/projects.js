@@ -6,6 +6,9 @@ const sharedLinks = {
   godubi: {
     website: 'https://godubi.com/'
   },
+  indiana: {
+    website: 'https://indiana.com.ar/'
+  },
   nonighter: {
     website: 'https://nonighter.com/'
   },
@@ -17,9 +20,10 @@ const sharedLinks = {
 
 const sharedImages = {
   architecture: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1685548879/portfolio_diego_foto_gae0mw.png',
-  godubi: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1726001088/GODUBI_mbkti2.jpg',
+  godubi: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227820/godubi_sn9xtx.png',
+  indiana: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227668/indiana-autos_vadtnl.png',
   nonighter: '/images/nonighter-placeholder.svg',
-  portfolio: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1729102707/my-portfolio_cicraz.png'
+  portfolio: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784228347/my-portfolio_utoqzt.png'
 }
 
 const projectsEnglish = [
@@ -37,6 +41,21 @@ const projectsEnglish = [
     actions: [
       { label: 'GitHub', href: sharedLinks.architecture.github, type: 'github' },
       { label: 'Visit Website', href: sharedLinks.architecture.website, type: 'website' }
+    ]
+  },
+  {
+    id: 'indiana-autos',
+    navigationLabel: 'Indiana Autos',
+    title: 'Indiana Autos',
+    subtitle: 'Vehicle marketplace backend',
+    description: 'Developed and maintained the backend for a vehicle publishing and management platform. Built CRUD APIs, dynamic filters, pagination and sorting with Node.js, Express, MongoDB and Mongoose; managed vehicle images through Multer and Cloudinary, redesigned discount pricing, and implemented contact emails, validation, centralized errors and protected admin endpoints.',
+    image: {
+      src: sharedImages.indiana,
+      alt: 'Indiana Autos vehicle marketplace'
+    },
+    technologies: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'Cloudinary'],
+    actions: [
+      { label: 'Visit Website', href: sharedLinks.indiana.website, type: 'website' }
     ]
   },
   {
@@ -58,7 +77,7 @@ const projectsEnglish = [
     id: 'nonighter-excel-add-in',
     navigationLabel: 'NoNighter',
     title: 'NoNighter — Excel Add-in',
-    subtitle: 'Frontend Developer · Jan 2025 – Jul 2026',
+    subtitle: 'Financial modeling Excel add-in · Jan 2025 – Jul 2026',
     description: 'Developed features for a Microsoft Excel add-in used in professional financial modeling. Built React, Office.js and Fluent UI interfaces integrated with AWS and DynamoDB services, and improved observability with Grafana Faro.',
     image: {
       src: sharedImages.nonighter,
@@ -105,6 +124,21 @@ const projectsSpanish = [
     ]
   },
   {
+    id: 'indiana-autos',
+    navigationLabel: 'Indiana Autos',
+    title: 'Indiana Autos',
+    subtitle: 'Backend para plataforma de vehículos',
+    description: 'Desarrollé y mantuve el backend de una plataforma para publicar y administrar vehículos. Implementé APIs CRUD, filtros dinámicos, paginación y ordenamiento con Node.js, Express, MongoDB y Mongoose; gestioné imágenes con Multer y Cloudinary, rediseñé los descuentos e incorporé correos de contacto, validaciones, errores centralizados y protección de endpoints administrativos.',
+    image: {
+      src: sharedImages.indiana,
+      alt: 'Plataforma de vehículos Indiana Autos'
+    },
+    technologies: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'Cloudinary'],
+    actions: [
+      { label: 'Visitar sitio', href: sharedLinks.indiana.website, type: 'website' }
+    ]
+  },
+  {
     id: 'godubi',
     navigationLabel: 'Godubi',
     title: 'Godubi',
@@ -123,7 +157,7 @@ const projectsSpanish = [
     id: 'nonighter-excel-add-in',
     navigationLabel: 'NoNighter',
     title: 'NoNighter — Complemento de Excel',
-    subtitle: 'Frontend Developer · Ene 2025 – Jul 2026',
+    subtitle: 'Complemento de Excel para modelado financiero · Ene 2025 – Jul 2026',
     description: 'Desarrollé funcionalidades para un complemento de Microsoft Excel usado en modelado financiero profesional. Construí interfaces con React, Office.js y Fluent UI, integradas con servicios en AWS y DynamoDB, y mejoré la observabilidad con Grafana Faro.',
     image: {
       src: sharedImages.nonighter,

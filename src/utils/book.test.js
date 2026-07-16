@@ -1,4 +1,5 @@
 import {
+  BOOK_DIRECTION,
   clamp,
   createSheetStyles,
   createVirtualNavigationStyles,
@@ -14,7 +15,7 @@ describe('book helpers', () => {
   test('creates stacking and rotation styles from one page count', () => {
     expect(createSheetStyles({
       totalSheetCount: 3,
-      flippedSheetCount: 1,
+      currentSheet: 1,
       activeSheetIndex: 0
     })).toEqual([
       { zIndex: 4, transform: 'rotateY(-180deg)' },
@@ -26,7 +27,7 @@ describe('book helpers', () => {
   test('keeps the turning sheet above adjacent and background sheets', () => {
     const styles = createSheetStyles({
       totalSheetCount: 12,
-      flippedSheetCount: 5,
+      currentSheet: 5,
       activeSheetIndex: 4
     })
 
@@ -38,11 +39,11 @@ describe('book helpers', () => {
 
   test('keeps only the origin sheet and distant destination above intermediate sheets', () => {
     const styles = createVirtualNavigationStyles({
-      currentPage: 4,
-      direction: 1,
+      currentSheet: 4,
+      direction: BOOK_DIRECTION.forward,
       isSettling: false,
       isTurning: true,
-      targetPage: 7,
+      targetSheet: 7,
       totalSheetCount: 9,
       turningSheetIndex: 4
     })
@@ -55,11 +56,11 @@ describe('book helpers', () => {
 
   test('keeps a distant backward destination above intermediate sheets', () => {
     const styles = createVirtualNavigationStyles({
-      currentPage: 7,
-      direction: -1,
+      currentSheet: 7,
+      direction: BOOK_DIRECTION.backward,
       isSettling: false,
       isTurning: true,
-      targetPage: 3,
+      targetSheet: 3,
       totalSheetCount: 9,
       turningSheetIndex: 6
     })
@@ -73,11 +74,11 @@ describe('book helpers', () => {
 
   test('removes intermediate sheets from the left side while closing', () => {
     const styles = createVirtualNavigationStyles({
-      currentPage: 7,
-      direction: -1,
+      currentSheet: 7,
+      direction: BOOK_DIRECTION.backward,
       isSettling: false,
       isTurning: false,
-      targetPage: 0,
+      targetSheet: 0,
       totalSheetCount: 9,
       turningSheetIndex: 6
     })
@@ -98,11 +99,11 @@ describe('book helpers', () => {
 
   test('normalizes hidden sheets while keeping the virtual sheet visible', () => {
     const styles = createVirtualNavigationStyles({
-      currentPage: 4,
-      direction: 1,
+      currentSheet: 4,
+      direction: BOOK_DIRECTION.forward,
       isSettling: true,
       isTurning: true,
-      targetPage: 7,
+      targetSheet: 7,
       totalSheetCount: 9,
       turningSheetIndex: 4
     })
@@ -119,7 +120,7 @@ describe('book helpers', () => {
   test('centers an open desktop book', () => {
     expect(getBookTransform({
       isNarrowViewport: false,
-      flippedSheetCount: 2,
+      currentSheet: 2,
       totalSheetCount: 12
     })).toBe('translateX(50%)')
   })
@@ -127,7 +128,7 @@ describe('book helpers', () => {
   test('positions an open book within a narrow viewport', () => {
     expect(getBookTransform({
       isNarrowViewport: true,
-      flippedSheetCount: 2,
+      currentSheet: 2,
       totalSheetCount: 12
     })).toBe('translateX(calc(47vw - 50%))')
   })

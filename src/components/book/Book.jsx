@@ -1,5 +1,6 @@
 import FrontSheet from './FrontSheet'
 import BackSheet from './BackSheet'
+import { BOOK_DIRECTION } from '../../utils/book'
 import '../../styles/all.css'
 
 const getSheetContent = ({ content, index, transition }) => {
@@ -14,8 +15,8 @@ const getSheetContent = ({ content, index, transition }) => {
     }
   }
 
-  if (transition.direction > 0) {
-    const destinationIndex = transition.targetPage - 1
+  if (transition.direction === BOOK_DIRECTION.forward) {
+    const destinationIndex = transition.targetSheet - 1
 
     return {
       backIndex: destinationIndex,
@@ -25,7 +26,7 @@ const getSheetContent = ({ content, index, transition }) => {
     }
   }
 
-  const destinationIndex = transition.targetPage
+  const destinationIndex = transition.targetSheet
 
   return {
     backIndex: index,
@@ -62,16 +63,15 @@ const Book = ({ content, language, book }) => {
             })}
           >
             <FrontSheet
-              index={sheetContent.frontIndex}
+              sheetIndex={sheetContent.frontIndex}
               page={sheetContent.frontPage}
               content={content}
               language={language}
               book={book}
             />
             <BackSheet
-              index={sheetContent.backIndex}
+              sheetIndex={sheetContent.backIndex}
               page={sheetContent.backPage}
-              sheetCount={content.pages.length}
               language={language}
               downloadCV={downloadCV}
               book={book}

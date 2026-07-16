@@ -7,6 +7,7 @@ import {
   SiGrafana,
   SiMicrosoft,
   SiMicrosoftexcel,
+  SiMongodb,
   SiNodedotjs,
   SiTypescript
 } from 'react-icons/si'
@@ -19,6 +20,7 @@ const technologies = [
   { name: 'Microsoft Excel Add-ins', Icon: SiMicrosoftexcel },
   { name: 'Fluent UI', Icon: MdWidgets },
   { name: 'Node.js', Icon: SiNodedotjs },
+  { name: 'MongoDB', Icon: SiMongodb },
   { name: 'AWS', Icon: FaAws },
   { name: 'DynamoDB', Icon: SiAmazondynamodb },
   { name: 'Grafana Faro', Icon: SiGrafana },
