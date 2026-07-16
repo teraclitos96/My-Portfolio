@@ -1,4 +1,4 @@
-import React from 'react'
+import WoodenButton from '../../WoodenButton'
 
 const BookAboutMe = ({ page, downloadCV }) => {
   return (
@@ -7,18 +7,16 @@ const BookAboutMe = ({ page, downloadCV }) => {
         {page.title}
       </h2>
       <img className='img-me mt-3' src={page.url} alt='me' />
-      <button
-        type='button'
-        className='wooden-button wooden-button-cv mt-3
-   letter-title-book'
+      <WoodenButton
+        variant='compact'
+        className='mt-3'
         onClick={(e) => {
           e.stopPropagation()
           downloadCV()
         }}
-
       >
         CV
-      </button>
+      </WoodenButton>
     </div>
 
   )

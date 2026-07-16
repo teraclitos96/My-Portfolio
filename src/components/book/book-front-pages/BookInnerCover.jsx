@@ -1,5 +1,3 @@
-import React from 'react'
-
 const BookInnerCover = ({ page }) => {
   return (
     <div className='book-title-container '>

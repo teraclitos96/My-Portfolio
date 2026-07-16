@@ -1,14 +1,11 @@
-import React from 'react'
-
-const BookProjectsList = ({ project, positionOfTheListOfProyects, setPositionPage, functionChangePageForward }) => {
+const BookProjectsList = ({ project, handleNavigate }) => {
   return (
     <li>
       <button
         type='button'
         onClick={(e) => {
           e.stopPropagation()
-          functionChangePageForward((project.numberOfTranslationsToMake), positionOfTheListOfProyects)
-          setPositionPage(project.positionOfTheFrontPage)
+          handleNavigate(project.destinationPage)
         }}
         className=' projects  letter-title-book no-button-styles  '
       >

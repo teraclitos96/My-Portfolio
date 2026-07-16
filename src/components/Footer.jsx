@@ -1,4 +1,3 @@
-import React from 'react'
 import MailIcon from './MailIcon'
 import GitHubIcon from './GitHubIcon'
 import LinkedinIcon from './LinkedinIcon'
