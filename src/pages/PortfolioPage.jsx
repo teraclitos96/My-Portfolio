@@ -15,6 +15,9 @@ import '../styles/all.css'
 const PortfolioPage = () => {
   const { t, i18n } = useTranslation(['common', 'book', 'projects'])
   const language = i18n.resolvedLanguage?.startsWith('es') ? 'es' : 'en'
+  const title = language === 'es'
+    ? 'Francisco Terán — Desarrollador Full-Stack | React y Node.js'
+    : 'Francisco Terán — Full-Stack Developer | React & Node.js'
   const content = createPortfolioContent({ t })
   const isCompactNavigation = useMediaQuery(MEDIA_QUERIES.compactNavigation)
   const isNarrowBook = useMediaQuery(MEDIA_QUERIES.narrowBook)
@@ -26,7 +29,7 @@ const PortfolioPage = () => {
   return (
     <>
       <Helmet>
-        <title>Francisco Teran</title>
+        <title>{title}</title>
         <html lang={language} />
       </Helmet>
       <Loader />

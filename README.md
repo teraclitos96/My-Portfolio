@@ -60,4 +60,4 @@ npm run build
 
 ## Live site
 
-[franciscoteran.com](https://franciscoteran.com/)
+[franciscoteran.vercel.app](https://franciscoteran.vercel.app/)

@@ -27,8 +27,7 @@ const NavBar = ({ isCompact, book }) => {
 
       <h1 className='text-center portfolio-name mb-0'>
         <a href='/' className='old-letter red link-main-title'>
-          <span className='d-none d-lg-inline'>{t('nav.name')}</span>
-          <span className='d-lg-none'>{t('nav.shortName')}</span>
+          {isCompact ? t('nav.shortName') : t('nav.name')}
         </a>
       </h1>
 
