@@ -38,7 +38,7 @@ const en = {
       logoAlt: 'Book logo'
     },
     inner: {
-      title: 'My portfolio',
+      title: 'My Portfolio',
       author: 'Francisco Teran'
     },
     index: {
@@ -48,13 +48,13 @@ const en = {
       contact: 'Contact'
     },
     about: {
-      title: 'About me',
+      title: 'About Me',
       biography: 'I am fascinated by logical reasoning and by the way simple, solid, and self-evident principles can give rise to beautiful and complex structures.\nProgramming allows me to build these logical structures through a "dialogue" with the computer, using a language that is both precise and creative. It is this combination of logic, creativity, and continuous learning that motivates me to keep improving as a software developer.',
       profileAlt: 'Francisco Teran profile',
       cvFile: '/Francisco_Teran_CV_EN.pdf'
     },
     projects: {
-      title: 'My projects'
+      title: 'My Projects'
     },
     navigation: {
       label: 'Book page navigation',
@@ -88,7 +88,7 @@ const en = {
     },
     nonighter: {
       navigationLabel: 'NoNighter',
-      title: 'NoNighter — Excel Add-in',
+      title: 'NoNighter',
       subtitle: 'Financial modeling Excel add-in · Jan 2025 – Jul 2026',
       description: 'Developed features for a Microsoft Excel add-in used in professional financial modeling. Built React, Office.js and Fluent UI interfaces integrated with AWS and DynamoDB services, and improved observability with Grafana Faro.',
       imageAlt: 'Generic preview for the NoNighter Microsoft Excel add-in'

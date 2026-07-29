@@ -19,10 +19,7 @@ const Loader = () => {
 
   return (
     <div
-      style={{
-        opacity: phase === 'fading' ? 0 : 1,
-        pointerEvents: phase === 'fading' ? 'none' : 'auto'
-      }}
+      style={{ opacity: phase === 'fading' ? 0 : 1 }}
       className='loader-container'
       aria-hidden='true'
     >

@@ -25,6 +25,7 @@ const PortfolioPage = () => {
     totalSheetCount: content.sheets.length,
     isNarrowViewport: isNarrowBook
   })
+  const handleTechnologyNavigate = book.actions.goTo
 
   return (
     <>
@@ -40,7 +41,10 @@ const PortfolioPage = () => {
         />
         <Container className='py-3'>
           <main className='min-vh-100'>
-            <Technologies />
+            <Technologies
+              navigation={content.technologyNavigation}
+              onNavigate={handleTechnologyNavigate}
+            />
             <div className='d-flex justify-content-center align-items-center'>
               <Book content={content} book={book} />
             </div>

@@ -1,4 +1,5 @@
 import { createProjects } from './projects'
+import { generalTechnologies } from './technologies'
 import {
   BOOK_SHEET,
   BOOK_PAGE_NAVIGATION,
@@ -140,6 +141,28 @@ const createProjectsNavigation = projects => projects.map((project, index) => ({
   destinationSheet: index + BOOK_SHEET.firstProject
 }))
 
+const createTechnologyNavigation = projects => generalTechnologies.reduce((navigation, technology) => {
+  const matchingProjects = projects
+    .map((project, index) => ({ project, index }))
+    .filter(({ project }) => project.technologies.includes(technology))
+
+  if (matchingProjects.length === 0) return navigation
+
+  const target = matchingProjects.reduce((mostImportant, candidate) => (
+    candidate.project.importance > mostImportant.project.importance
+      ? candidate
+      : mostImportant
+  ))
+
+  navigation[technology] = {
+    destinationSheet: target.index + BOOK_SHEET.firstProject,
+    importance: target.project.importance,
+    projectId: target.project.id
+  }
+
+  return navigation
+}, {})
+
 const createPortfolioContent = ({ t }) => {
   const copy = createCopy(t)
   const projects = createProjects({ t })
@@ -147,6 +170,7 @@ const createPortfolioContent = ({ t }) => {
   return {
     sheets: createBookSheets({ copy, projects }),
     projects: createProjectsNavigation(projects),
+    technologyNavigation: createTechnologyNavigation(projects),
     index: createIndexNavigation(copy),
     cvFile: copy.cvFile
   }

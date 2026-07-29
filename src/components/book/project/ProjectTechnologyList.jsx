@@ -6,11 +6,14 @@ import {
   SiAmazondynamodb,
   SiCloudinary,
   SiExpress,
+  SiGrafana,
   SiMicrosoft,
+  SiMicrosoftexcel,
   SiMongodb,
   SiMongoose,
   SiNodedotjs,
-  SiReactrouter
+  SiReactrouter,
+  SiTypescript
 } from 'react-icons/si'
 import { Tooltip } from 'react-tooltip'
 
@@ -22,15 +25,18 @@ const technologyIcons = {
   DynamoDB: SiAmazondynamodb,
   Express: SiExpress,
   'Fluent UI': MdWidgets,
+  'Grafana Faro': SiGrafana,
   HTML5: FaHtml5,
   JavaScript: IoLogoJavascript,
   MongoDB: SiMongodb,
   Mongoose: SiMongoose,
   'Node.js': SiNodedotjs,
   'Office.js': SiMicrosoft,
+  'Microsoft Excel Add-ins': SiMicrosoftexcel,
   React: FaReact,
   'React Router': SiReactrouter,
-  'Vue 2': FaVuejs,
+  TypeScript: SiTypescript,
+  'Vue.js': FaVuejs,
   Vuex: RiVuejsFill,
   Vuexy: MdDashboardCustomize,
   WebSockets: MdCable

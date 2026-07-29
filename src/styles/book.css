@@ -161,6 +161,9 @@
   font-size: 1em;
   margin-top: 0.2em;
 }
+.biography-description {
+  color: #000;
+}
 .project-subtitle {
   color: rgb(93, 97, 102);
   font-size: 0.78em;
@@ -228,6 +231,7 @@
   padding-bottom: 2.2em;
 }
 .project-description.letter-body-size {
+  color: #000;
   font-size: max(0.75em, 12px);
   line-height: 1.4;
   margin: 0;
@@ -265,6 +269,7 @@
   outline: none;
 }
 .project-technologies {
+  flex-wrap: wrap;
   gap: 0.65em;
   justify-content: center;
   margin: 0.35em auto 0;

@@ -47,12 +47,29 @@ describe.each(['en', 'es'])('%s navigation data', language => {
     projectSpreads.forEach(({ overview, details }) => {
       expect(overview).toBe(details)
       expect(overview.image.alt).toBeTruthy()
+      expect(overview.importance).toBeGreaterThanOrEqual(1)
+      expect(overview.importance).toBeLessThanOrEqual(10)
       expect(overview.technologies.length).toBeGreaterThanOrEqual(3)
-      expect(overview.technologies.length).toBeLessThanOrEqual(6)
       expect(overview.actions.length).toBeGreaterThan(0)
       expect(overview.description.trim().split(/\s+/).length).toBeLessThanOrEqual(90)
       expect(overview.description).not.toMatch(/manually positioned/i)
     })
+  })
+
+  test('maps each technology to the most important project that uses it', () => {
+    expect(content.technologyNavigation.React).toEqual(expect.objectContaining({
+      destinationSheet: 8,
+      importance: 5,
+      projectId: 'nonighter-excel-add-in'
+    }))
+    expect(content.technologyNavigation['Node.js'].projectId).toBe('indiana-autos')
+    expect(content.technologyNavigation['Vue.js'].projectId).toBe('godubi')
+  })
+
+  test('only creates destinations for technologies shared by both stacks', () => {
+    expect(content.technologyNavigation.JavaScript).toBeUndefined()
+    expect(content.technologyNavigation.Express).toBeUndefined()
+    expect(Object.keys(content.technologyNavigation)).toHaveLength(13)
   })
 
   test('does not expose a private Godubi repository', () => {
