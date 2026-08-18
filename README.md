@@ -6,7 +6,7 @@ Interactive developer portfolio presented as an animated book. It combines bilin
 
 - English and Spanish content powered by `react-i18next`.
 - Animated single-sheet turns and direct navigation to distant sheets.
-- Responsive book and navigation for desktop and mobile.
+- Responsive book and navigation for mobile and desktop.
 - Reusable project overviews, details, actions, technology lists and page navigation.
 - Project technology icons with accessible tooltips.
 - Downloadable CV according to the selected language.
