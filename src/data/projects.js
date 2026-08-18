@@ -3,34 +3,36 @@ const projectDefinitions = [
     id: 'architecture-portfolio',
     importance: 1,
     translationKey: 'architecture',
-    imageSrc: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1685548879/portfolio_diego_foto_gae0mw.png',
+    imageSrc:
+      'https://res.cloudinary.com/duuwqmpmn/image/upload/v1685548879/portfolio_diego_foto_gae0mw.png',
     technologies: ['HTML5', 'CSS3', 'JavaScript'],
     actions: [
       {
         labelKey: 'github',
         href: 'https://github.com/teraclitos/Portafolio-Diego-Helguera',
-        type: 'github'
+        type: 'github',
       },
       {
         labelKey: 'website',
         href: 'https://diegohelguera.com/',
-        type: 'website'
-      }
-    ]
+        type: 'website',
+      },
+    ],
   },
   {
     id: 'indiana-autos',
     importance: 3,
     translationKey: 'indiana',
-    imageSrc: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227668/indiana-autos_vadtnl.png',
+    imageSrc:
+      'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227668/indiana-autos_vadtnl.png',
     technologies: ['Node.js', 'Express', 'MongoDB', 'Mongoose', 'Cloudinary'],
     actions: [
       {
         labelKey: 'website',
         href: 'https://indiana.com.ar/',
-        type: 'website'
-      }
-    ]
+        type: 'website',
+      },
+    ],
   },
   {
     id: 'godubi',
@@ -42,9 +44,9 @@ const projectDefinitions = [
       {
         labelKey: 'website',
         href: 'https://godubi.com/',
-        type: 'website'
-      }
-    ]
+        type: 'website',
+      },
+    ],
   },
   {
     id: 'nonighter-excel-add-in',
@@ -59,57 +61,59 @@ const projectDefinitions = [
       'Fluent UI',
       'AWS',
       'DynamoDB',
-      'Grafana Faro'
+      'Grafana Faro',
     ],
     actions: [
       {
         labelKey: 'website',
         href: 'https://nonighter.com/',
-        type: 'website'
-      }
-    ]
+        type: 'website',
+      },
+    ],
   },
   {
     id: 'my-portfolio',
     importance: 2,
     translationKey: 'portfolio',
-    imageSrc: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784228347/my-portfolio_utoqzt.png',
+    imageSrc:
+      'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784228347/my-portfolio_utoqzt.png',
     technologies: ['React', 'React Router', 'Bootstrap'],
     actions: [
       {
         labelKey: 'github',
         href: 'https://github.com/teraclitos/My-Portfolio',
-        type: 'github'
+        type: 'github',
       },
       {
         labelKey: 'viewProject',
         href: 'https://franciscoteran.vercel.app/',
-        type: 'website'
-      }
-    ]
-  }
-]
+        type: 'website',
+      },
+    ],
+  },
+];
 
-const createProjects = ({ t }) => projectDefinitions.map(project => {
-  const translationPath = `projects:${project.translationKey}`
+const createProjects = ({ t }) =>
+  projectDefinitions.map((project) => {
+    const translationPath = `projects:${project.translationKey}`;
 
-  return {
-    id: project.id,
-    importance: project.importance,
-    navigationLabel: t(`${translationPath}.navigationLabel`),
-    title: t(`${translationPath}.title`),
-    subtitle: t(`${translationPath}.subtitle`),
-    description: t(`${translationPath}.description`),
-    image: {
-      src: project.imageSrc,
-      alt: t(`${translationPath}.imageAlt`)
-    },
-    technologies: project.technologies,
-    actions: project.actions.map(({ labelKey, ...action }) => ({
-      ...action,
-      label: t(`common:actions.${labelKey}`)
-    }))
-  }
-})
+    return {
+      id: project.id,
+      importance: project.importance,
+      navigationLabel: t(`${translationPath}.navigationLabel`),
+      title: t(`${translationPath}.title`),
+      subtitle: t(`${translationPath}.subtitle`),
+      description: t(`${translationPath}.description`),
+      image: {
+        src: project.imageSrc,
+        alt: t(`${translationPath}.imageAlt`),
+      },
+      technologies: project.technologies,
+      actions: project.actions.map(({ labelKey, ...action }) => ({
+        ...action,
+        label: t(`common:actions.${labelKey}`),
+      })),
+    };
+  });
 
-export { createProjects }
+export { createProjects };

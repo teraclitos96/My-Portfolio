@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: calc(15.625em*1);
-  height: calc(18.75em*1);
+  min-width: calc(15.625em * 1);
+  height: calc(18.75em * 1);
   position: relative;
   perspective: 1000px;
   transition: 0.5s;
@@ -25,7 +25,7 @@
 .face-back {
   width: 100%;
   height: 100%;
-  background: url("../../public/images/OLD_PAPER_TEXTURE.jpg");
+  background: url('../../public/images/OLD_PAPER_TEXTURE.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   padding: 15px;
@@ -82,7 +82,9 @@
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 0.2em;
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
 }
 .book-navigation-list .projects:hover,
 .book-navigation-list .projects:focus {
@@ -119,7 +121,9 @@
   text-decoration: underline;
   text-decoration-color: transparent;
   text-underline-offset: 0.2em;
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
 }
 .book-page-navigation-link:hover {
   color: #c8293b;

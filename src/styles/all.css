@@ -1,14 +1,14 @@
-@import url("main.css");
-@import url("navbar.css");
-@import url("book.css");
-@import url("footer.css");
-@import url("loader.css");
-@import url("error404.css");
-@import url("mediaqueries.css");
-@import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital@1&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Overlock+SC&display=swap");
+@import url('main.css');
+@import url('navbar.css');
+@import url('book.css');
+@import url('footer.css');
+@import url('loader.css');
+@import url('error404.css');
+@import url('mediaqueries.css');
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overlock+SC&display=swap');
 
 .book-content,
 .book {
@@ -24,14 +24,14 @@
 }
 
 * {
-  font-family: "Gentium Book Plus", serif;
+  font-family: 'Gentium Book Plus', serif;
 }
 
 .old-letter {
-  font-family: "Overlock SC", cursive;
+  font-family: 'Overlock SC', cursive;
 }
 .letter-title-book {
-  font-family: "Barlow Semi Condensed", sans-serif;
+  font-family: 'Barlow Semi Condensed', sans-serif;
 }
 
 .red {
@@ -50,9 +50,7 @@
 }
 
 .list-style-none {
-  list-style-type: none ;
- 
-
+  list-style-type: none;
 }
 
 .title-size {
@@ -64,13 +62,13 @@
 .letter-body-size {
   font-size: 0.8em;
 }
-.no-button-styles{
+.no-button-styles {
   padding: 4px;
   color: #212529;
-  
-   background: none;
-  border:none; 
-    cursor: pointer
+
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 ::-webkit-scrollbar {
   width: 6px; /* Set width of the scrollbar */

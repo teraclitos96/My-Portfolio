@@ -11,7 +11,7 @@ const generalTechnologies = [
   'Grafana Faro',
   'Vue.js',
   'Vuex',
-  'WebSockets'
-]
+  'WebSockets',
+];
 
-export { generalTechnologies }
+export { generalTechnologies };

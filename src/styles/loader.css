@@ -22,7 +22,7 @@
   left: 2em;
 }
 .lds-dual-ring:after {
-  content: " ";
+  content: ' ';
   display: block;
   width: 2em;
   height: 2em;
