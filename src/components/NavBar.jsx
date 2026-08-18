@@ -1,54 +1,54 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useTranslation } from 'react-i18next';
-import WoodenButton from './WoodenButton';
-import '../styles/all.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
+import WoodenButton from './WoodenButton'
+import '../styles/all.css'
 
 const NavBar = ({ isCompact, book }) => {
-  const { t, i18n } = useTranslation('common');
-  const language = i18n.resolvedLanguage?.startsWith('es') ? 'es' : 'en';
-  const toggleIndex = () => book.actions.toggleIndex(isCompact);
-  const toggleLanguage = () => i18n.changeLanguage(language === 'en' ? 'es' : 'en');
+  const { t, i18n } = useTranslation('common')
+  const language = i18n.resolvedLanguage?.startsWith('es') ? 'es' : 'en'
+  const toggleIndex = () => book.actions.toggleIndex(isCompact)
+  const toggleLanguage = () => i18n.changeLanguage(language === 'en' ? 'es' : 'en')
 
   return (
-    <nav className="px-3 px-lg-5 d-flex justify-content-between align-items-center nav-bar">
+    <nav className='px-3 px-lg-5 d-flex justify-content-between align-items-center nav-bar'>
       <button
-        type="button"
+        type='button'
         aria-label={book.view.isOpen ? t('nav.closeBook') : t('nav.openIndex')}
         onClick={toggleIndex}
         disabled={book.view.isLocked}
-        className="open-container d-flex d-lg-none no-button-styles"
+        className='open-container d-flex d-lg-none no-button-styles'
       >
         <FontAwesomeIcon
-          className="responsive-open red"
+          className='responsive-open red'
           icon={book.view.isOpen ? faXmark : faBars}
         />
       </button>
 
-      <h1 className="text-center portfolio-name mb-0">
-        <a href="/" className="old-letter red link-main-title">
+      <h1 className='text-center portfolio-name mb-0'>
+        <a href='/' className='old-letter red link-main-title'>
           {isCompact ? t('nav.shortName') : t('nav.name')}
         </a>
       </h1>
 
-      <div className="d-flex justify-content-around ms-lg-5 align-items-center">
+      <div className='d-flex justify-content-around ms-lg-5 align-items-center'>
         <button
-          type="button"
+          type='button'
           onClick={toggleIndex}
           disabled={book.view.isLocked}
-          className="link-nav text-center dark-brown no-button-styles"
+          className='link-nav text-center dark-brown no-button-styles'
         >
-          <span className="hover-nav-link letter-title-book d-none d-lg-inline-block">
+          <span className='hover-nav-link letter-title-book d-none d-lg-inline-block'>
             {t('nav.index')}
           </span>
         </button>
 
-        <WoodenButton className="ms-lg-5" onClick={toggleLanguage}>
+        <WoodenButton className='ms-lg-5' onClick={toggleLanguage}>
           {t('nav.switchLanguage')}
         </WoodenButton>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default NavBar;
+export default NavBar

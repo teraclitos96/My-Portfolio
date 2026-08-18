@@ -3,7 +3,7 @@ const IndexNavigationItem = ({ item, handleNavigate }) => {
     <li>
       {item.href ? (
         <a
-          className="mb-2 projects letter-title-book contact-link"
+          className='mb-2 projects letter-title-book contact-link'
           href={item.href}
           onClick={(event) => event.stopPropagation()}
         >
@@ -11,18 +11,18 @@ const IndexNavigationItem = ({ item, handleNavigate }) => {
         </a>
       ) : (
         <button
-          type="button"
-          className="mb-2  projects letter-title-book no-button-styles"
+          type='button'
+          className='mb-2  projects letter-title-book no-button-styles'
           onClick={(e) => {
-            e.stopPropagation();
-            handleNavigate(item.destinationSheet);
+            e.stopPropagation()
+            handleNavigate(item.destinationSheet)
           }}
         >
           {item.title}
         </button>
       )}
     </li>
-  );
-};
+  )
+}
 
-export default IndexNavigationItem;
+export default IndexNavigationItem

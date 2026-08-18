@@ -10,14 +10,14 @@ const projectDefinitions = [
       {
         labelKey: 'github',
         href: 'https://github.com/teraclitos/Portafolio-Diego-Helguera',
-        type: 'github',
+        type: 'github'
       },
       {
         labelKey: 'website',
         href: 'https://diegohelguera.com/',
-        type: 'website',
-      },
-    ],
+        type: 'website'
+      }
+    ]
   },
   {
     id: 'indiana-autos',
@@ -30,9 +30,9 @@ const projectDefinitions = [
       {
         labelKey: 'website',
         href: 'https://indiana.com.ar/',
-        type: 'website',
-      },
-    ],
+        type: 'website'
+      }
+    ]
   },
   {
     id: 'godubi',
@@ -44,9 +44,9 @@ const projectDefinitions = [
       {
         labelKey: 'website',
         href: 'https://godubi.com/',
-        type: 'website',
-      },
-    ],
+        type: 'website'
+      }
+    ]
   },
   {
     id: 'nonighter-excel-add-in',
@@ -61,15 +61,15 @@ const projectDefinitions = [
       'Fluent UI',
       'AWS',
       'DynamoDB',
-      'Grafana Faro',
+      'Grafana Faro'
     ],
     actions: [
       {
         labelKey: 'website',
         href: 'https://nonighter.com/',
-        type: 'website',
-      },
-    ],
+        type: 'website'
+      }
+    ]
   },
   {
     id: 'my-portfolio',
@@ -82,20 +82,20 @@ const projectDefinitions = [
       {
         labelKey: 'github',
         href: 'https://github.com/teraclitos/My-Portfolio',
-        type: 'github',
+        type: 'github'
       },
       {
         labelKey: 'viewProject',
         href: 'https://franciscoteran.vercel.app/',
-        type: 'website',
-      },
-    ],
-  },
-];
+        type: 'website'
+      }
+    ]
+  }
+]
 
 const createProjects = ({ t }) =>
   projectDefinitions.map((project) => {
-    const translationPath = `projects:${project.translationKey}`;
+    const translationPath = `projects:${project.translationKey}`
 
     return {
       id: project.id,
@@ -106,14 +106,14 @@ const createProjects = ({ t }) =>
       description: t(`${translationPath}.description`),
       image: {
         src: project.imageSrc,
-        alt: t(`${translationPath}.imageAlt`),
+        alt: t(`${translationPath}.imageAlt`)
       },
       technologies: project.technologies,
       actions: project.actions.map(({ labelKey, ...action }) => ({
         ...action,
-        label: t(`common:actions.${labelKey}`),
-      })),
-    };
-  });
+        label: t(`common:actions.${labelKey}`)
+      }))
+    }
+  })
 
-export { createProjects };
+export { createProjects }
