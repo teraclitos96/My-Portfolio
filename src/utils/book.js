@@ -91,10 +91,10 @@ const getSheetDepth = ({ sheetIndex, activeSheetIndex, currentSheet, totalSheetC
   sheetIndex === activeSheetIndex
     ? totalSheetCount + 1
     : getRestingSheetDepth({
-      sheetIndex,
-      currentSheet,
-      totalSheetCount
-    })
+        sheetIndex,
+        currentSheet,
+        totalSheetCount
+      })
 
 const getRestingSheetDepth = ({ sheetIndex, currentSheet, totalSheetCount }) =>
   sheetIndex < currentSheet ? sheetIndex + 1 : totalSheetCount - sheetIndex

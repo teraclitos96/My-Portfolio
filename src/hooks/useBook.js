@@ -289,14 +289,14 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
       navigationTransition,
       sheetStyles: navigationTransition
         ? createVirtualNavigationStyles({
-          ...navigationTransition,
-          totalSheetCount
-        })
+            ...navigationTransition,
+            totalSheetCount
+          })
         : createSheetStyles({
-          totalSheetCount,
-          currentSheet,
-          activeSheetIndex
-        })
+            totalSheetCount,
+            currentSheet,
+            activeSheetIndex
+          })
     }),
     [
       activeSheetIndex,
