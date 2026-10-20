@@ -24,6 +24,7 @@
   color: #c8293b;
 }
 .logo-footer {
+  height: auto;
   width: 6em;
   cursor: pointer;
 }

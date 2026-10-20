@@ -1,10 +1,21 @@
 import { getLinkTarget } from '../../../utils/links'
+import { getImageSources, optimizeImage } from '../../../utils/images'
 
 const ProjectOverviewView = ({ page }) => {
   const { project } = page
   const websiteAction = project.actions.find((action) => action.type === 'website')
   const projectImage = (
-    <img className='project-image' src={project.image.src} alt={project.image.alt} />
+    <img
+      className='project-image'
+      src={optimizeImage(project.image.src)}
+      srcSet={getImageSources(project.image.src, project.image.width)}
+      sizes='(max-width: 575px) 42vw, 260px'
+      width={project.image.width}
+      height={project.image.height}
+      loading='lazy'
+      decoding='async'
+      alt={project.image.alt}
+    />
   )
 
   return (

@@ -5,6 +5,8 @@ import es from './locales/es'
 
 i18n.use(initReactI18next).init({
   resources: { en, es },
+  lng:
+    typeof window !== 'undefined' && /^\/es(?:\/|$)/.test(window.location.pathname) ? 'es' : 'en',
   fallbackLng: 'en',
   supportedLngs: ['en', 'es'],
   defaultNS: 'common',

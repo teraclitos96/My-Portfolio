@@ -1,0 +1,17 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "routes": [
+    { "src": "^/$", "status": 308, "headers": { "Location": "/en/" } },
+    { "src": "^/(en|es)/?$", "dest": "/$1/index.html" },
+    {
+      "src": "^/(en|es)/projects/(architecture-portfolio|indiana-autos|godubi|nonighter-excel-add-in|my-portfolio)/?$",
+      "dest": "/$1/projects/$2/index.html"
+    },
+    { "handle": "filesystem" },
+    { "src": "^/es(?:/.*)?$", "dest": "/es/404.html", "status": 404 },
+    { "src": "^/en(?:/.*)?$", "dest": "/en/404.html", "status": 404 },
+    { "src": "/.*", "dest": "/404.html", "status": 404 }
+  ]
+}

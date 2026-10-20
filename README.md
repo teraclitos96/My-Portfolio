@@ -58,6 +58,23 @@ npm test -- --watchAll=false --runInBand --forceExit
 npm run build
 ```
 
+## Search and localized URLs
+
+The root URL redirects permanently to `/en/`. English and Spanish have separate home pages (`/en/`, `/es/`) and project URLs such as `/es/projects/indiana-autos/`. Opening a project URL starts the book at its case study. Ordinary clicks on the project index still animate the book; modified clicks and opening a link in a new tab use the project URL. The language link preserves the selected project.
+
+`npm run build` prerenders the React application to HTML for both languages and all five projects, including localized canonical, Open Graph, Twitter, `hreflang` and structured data. It generates the sitemap from project definitions and verifies the emitted pages. The browser hydrates that same HTML. The production build also includes a `noindex` error page; `vercel.json` serves unknown paths with HTTP 404 instead of rewriting every path to the homepage.
+
+Cloudinary images use automatic format and quality, limited resolution and responsive sources. Image dimensions reserve their aspect ratio; project images use native lazy loading. Social previews use the compressed `public/og.jpg`.
+
+To inspect the production build and its HTTP routing locally:
+
+```bash
+npm run build
+npm run preview
+```
+
+The preview runs at http://127.0.0.1:4173. The changes take effect on the published site after deployment; indexing and search traffic must be checked in Search Console.
+
 ## Live site
 
 [franciscoteran.vercel.app](https://franciscoteran.vercel.app/)

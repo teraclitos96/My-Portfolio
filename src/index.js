@@ -4,10 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './i18n'
 import App from './App'
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
-
-root.render(
+const container = document.getElementById('root')
+const app = (
   <React.StrictMode>
     <App />
   </React.StrictMode>
 )
+
+if (container.hasChildNodes()) ReactDOM.hydrateRoot(container, app)
+else ReactDOM.createRoot(container).render(app)

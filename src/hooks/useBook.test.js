@@ -13,6 +13,19 @@ describe('useBook keyboard navigation', () => {
   beforeEach(() => jest.useFakeTimers())
   afterEach(() => jest.useRealTimers())
 
+  test('opens a project URL on the right sheet with its overview above earlier pages', () => {
+    const { result } = renderHook(() =>
+      useBook({ totalSheetCount: 10, isNarrowViewport: false, initialSheet: 8 })
+    )
+    expect(result.current.view.currentSheet).toBe(8)
+    expect(result.current.view.sheetStyles[7].zIndex).toBeGreaterThan(
+      result.current.view.sheetStyles[0].zIndex
+    )
+    fireEvent.keyDown(window, { key: 'ArrowLeft' })
+    act(() => jest.advanceTimersByTime(700))
+    expect(result.current.view.currentSheet).toBe(7)
+  })
+
   test('moves one sheet with the arrow keys', () => {
     const { result } = renderBook()
 
@@ -68,7 +81,7 @@ describe('useBook keyboard navigation', () => {
     expect(result.current.view.currentSheet).toBe(2)
 
     act(() => jest.advanceTimersByTime(700))
-    expect(firstItem).toHaveFocus()
+    expect(document.activeElement).toBe(firstItem)
     list.remove()
   })
 
@@ -82,7 +95,7 @@ describe('useBook keyboard navigation', () => {
 
     fireEvent.keyDown(window, { key: 'Enter' })
 
-    expect(firstItem).toHaveFocus()
+    expect(document.activeElement).toBe(firstItem)
     list.remove()
   })
 })

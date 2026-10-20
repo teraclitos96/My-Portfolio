@@ -1,6 +1,8 @@
 const projectDefinitions = [
   {
     id: 'architecture-portfolio',
+    imageWidth: 564,
+    imageHeight: 327,
     importance: 1,
     translationKey: 'architecture',
     imageSrc:
@@ -21,6 +23,8 @@ const projectDefinitions = [
   },
   {
     id: 'indiana-autos',
+    imageWidth: 1897,
+    imageHeight: 844,
     importance: 3,
     translationKey: 'indiana',
     imageSrc:
@@ -36,6 +40,8 @@ const projectDefinitions = [
   },
   {
     id: 'godubi',
+    imageWidth: 1894,
+    imageHeight: 946,
     importance: 4,
     translationKey: 'godubi',
     imageSrc: 'https://res.cloudinary.com/duuwqmpmn/image/upload/v1784227820/godubi_sn9xtx.png',
@@ -50,6 +56,8 @@ const projectDefinitions = [
   },
   {
     id: 'nonighter-excel-add-in',
+    imageWidth: 267,
+    imageHeight: 150,
     importance: 5,
     translationKey: 'nonighter',
     imageSrc: '/images/nonighter-placeholder.svg',
@@ -73,6 +81,8 @@ const projectDefinitions = [
   },
   {
     id: 'my-portfolio',
+    imageWidth: 1903,
+    imageHeight: 982,
     importance: 2,
     translationKey: 'portfolio',
     imageSrc:
@@ -106,6 +116,8 @@ const createProjects = ({ t }) =>
       description: t(`${translationPath}.description`),
       image: {
         src: project.imageSrc,
+        width: project.imageWidth,
+        height: project.imageHeight,
         alt: t(`${translationPath}.imageAlt`)
       },
       technologies: project.technologies,
@@ -116,4 +128,4 @@ const createProjects = ({ t }) =>
     }
   })
 
-export { createProjects }
+export { createProjects, projectDefinitions }

@@ -1,3 +1,5 @@
+import { optimizeImage } from '../../../utils/images'
+
 const CoverView = ({ page }) => {
   return (
     <div className='portada-container d-flex flex-column justify-content-center align-items-center'>
@@ -9,7 +11,13 @@ const CoverView = ({ page }) => {
       </div>
       <img
         className='img-logo-libro'
-        src='https://res.cloudinary.com/duuwqmpmn/image/upload/v1685995705/logo-fondo-librorojo_qplqze.png'
+        src={optimizeImage(
+          'https://res.cloudinary.com/duuwqmpmn/image/upload/v1685995705/logo-fondo-librorojo_qplqze.png',
+          320
+        )}
+        width='291'
+        height='298'
+        decoding='async'
         alt={page.logoAlt}
       />
     </div>

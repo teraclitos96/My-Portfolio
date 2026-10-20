@@ -2,13 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 import WoodenButton from './WoodenButton'
+import { getPagePath } from '../utils/seo'
 import '../styles/all.css'
 
-const NavBar = ({ isCompact, book }) => {
+const NavBar = ({ isCompact, book, project }) => {
   const { t, i18n } = useTranslation('common')
   const language = i18n.resolvedLanguage?.startsWith('es') ? 'es' : 'en'
   const toggleIndex = () => book.actions.toggleIndex(isCompact)
-  const toggleLanguage = () => i18n.changeLanguage(language === 'en' ? 'es' : 'en')
 
   return (
     <nav className='px-3 px-lg-5 d-flex justify-content-between align-items-center nav-bar'>
@@ -26,7 +26,8 @@ const NavBar = ({ isCompact, book }) => {
       </button>
 
       <h1 className='text-center portfolio-name mb-0'>
-        <a href='/' className='old-letter red link-main-title'>
+        <a href={getPagePath(language)} className='old-letter red link-main-title'>
+          {project && <span className='visually-hidden'>{project.title} — </span>}
           {isCompact ? t('nav.shortName') : t('nav.name')}
         </a>
       </h1>
@@ -43,7 +44,11 @@ const NavBar = ({ isCompact, book }) => {
           </span>
         </button>
 
-        <WoodenButton className='ms-lg-5' onClick={toggleLanguage}>
+        <WoodenButton
+          className='ms-lg-5'
+          href={getPagePath(language === 'en' ? 'es' : 'en', project?.id)}
+          hrefLang={language === 'en' ? 'es' : 'en'}
+        >
           {t('nav.switchLanguage')}
         </WoodenButton>
       </div>

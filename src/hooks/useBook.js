@@ -20,20 +20,22 @@ import {
 const TURN_FALLBACK_DURATION = 700
 const INTERACTIVE_SELECTOR = 'a, button, input, select, textarea, [contenteditable="true"]'
 const EDITABLE_SELECTOR = 'input, select, textarea, [contenteditable="true"]'
+const useBrowserLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 const matchesTarget = ({ target, selector }) =>
   target instanceof window.Element && Boolean(target.closest(selector))
 
-const useBook = ({ totalSheetCount, isNarrowViewport }) => {
+const useBook = ({ totalSheetCount, isNarrowViewport, initialSheet = 0 }) => {
+  const initialActiveSheet = Math.max(initialSheet - 1, 0)
   // Book position: 0 is closed; each increment means one more sheet has turned.
-  const [currentSheet, setCurrentSheet] = useState(0)
-  const [activeSheetIndex, setActiveSheetIndex] = useState(0)
+  const [currentSheet, setCurrentSheet] = useState(initialSheet)
+  const [activeSheetIndex, setActiveSheetIndex] = useState(initialActiveSheet)
   const [navigationTransition, setNavigationTransition] = useState(null)
   const [isLocked, setIsLocked] = useState(false)
   const timers = useRef([])
   const animationFrames = useRef([])
   const lock = useRef(false)
-  const activeSheet = useRef(0)
+  const activeSheet = useRef(initialActiveSheet)
   const transitionState = useRef(null)
 
   const clearScheduledWork = useCallback(() => {
@@ -48,13 +50,13 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
   useEffect(() => {
     clearScheduledWork()
     lock.current = false
-    activeSheet.current = 0
+    activeSheet.current = initialActiveSheet
     transitionState.current = null
     setIsLocked(false)
     setNavigationTransition(null)
-    setCurrentSheet(0)
-    setActiveSheetIndex(0)
-  }, [totalSheetCount, clearScheduledWork])
+    setCurrentSheet(initialSheet)
+    setActiveSheetIndex(initialActiveSheet)
+  }, [totalSheetCount, initialSheet, initialActiveSheet, clearScheduledWork])
 
   const releaseLock = useCallback(() => {
     timers.current.forEach(clearTimeout)
@@ -177,7 +179,7 @@ const useBook = ({ totalSheetCount, isNarrowViewport }) => {
     [completeTurn]
   )
 
-  useLayoutEffect(() => {
+  useBrowserLayoutEffect(() => {
     const focusSheet = navigationTransition?.targetSheet ?? currentSheet
 
     focusFirstBookListItem({

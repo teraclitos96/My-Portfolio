@@ -59,6 +59,13 @@
   padding-top: 0;
 }
 
+.front-sheet-content--project-details {
+  height: calc(100% - 1.5em);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
 .portada,
 .portada-back {
   background: #c8293b;
@@ -137,6 +144,7 @@
 
 .img-me {
   width: 9.5em;
+  height: auto;
 }
 .wooden-button-cv {
   width: auto;
@@ -201,6 +209,7 @@
   object-fit: contain;
   transition: transform 0.3s ease;
   width: 13em;
+  height: auto;
 }
 .project-image-link {
   display: block;
@@ -230,9 +239,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.55em;
-  height: 100%;
+  min-height: 100%;
   justify-content: space-between;
-  padding-bottom: 2.2em;
+  padding-bottom: 0.5em;
 }
 .project-description.letter-body-size {
   color: #000;
@@ -300,6 +309,7 @@
 
 .img-logo-libro {
   width: 8.5em;
+  height: auto;
 }
 .title-book-container {
   position: relative;
